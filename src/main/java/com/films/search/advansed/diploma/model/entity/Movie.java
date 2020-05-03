@@ -1,10 +1,18 @@
 package com.films.search.advansed.diploma.model.entity;
 
-import java.util.List;
-import java.util.Set;
-import javax.persistence.*;
-import lombok.*;
 import java.time.LocalDate;
+import java.util.Set;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
@@ -19,28 +27,28 @@ public class Movie {
   private String name;
   private String country;
   private LocalDate premierDate;
-  private Integer length;
+  private Integer lengthInMinutes;
 
   @ElementCollection
-  private List<Genre> genres;
+  private Set<Genre> genres;
 
   @ElementCollection
-  private List<Tag> tags;
+  private Set<Tag> tags;
 
   @ManyToMany
-  @JoinTable(name = "movie_directors",
+  @JoinTable(name = "directors",
       joinColumns = {@JoinColumn(name = "movie_id")},
       inverseJoinColumns = {@JoinColumn(name = "profile_id")} )
   private Set<Profile> directors;
 
   @ManyToMany
-  @JoinTable(name = "movie_actors",
+  @JoinTable(name = "actors",
       joinColumns = {@JoinColumn(name = "movie_id")},
       inverseJoinColumns = {@JoinColumn(name = "profile_id")} )
   private Set<Profile> actors;
 
   @ManyToMany
-  @JoinTable(name = "movie_producers",
+  @JoinTable(name = "producers",
       joinColumns = {@JoinColumn(name = "movie_id")},
       inverseJoinColumns = {@JoinColumn(name = "profile_id")} )
   private Set<Profile> producers;

@@ -18,6 +18,7 @@ public class HomePageController {
   @GetMapping("/search")
   public ModelAndView searchUser(SearchForm searchForm) {
     ModelAndView model = new ModelAndView("hello");
+    model.addObject("message", "Advanced search home page!");
     model.addObject("search", searchForm.getSearchLine());
     return model;
   }

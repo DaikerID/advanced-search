@@ -1,9 +1,14 @@
 package com.films.search.advansed.diploma.model.entity;
 
-import java.util.List;
 import java.util.Set;
-import javax.persistence.*;
-import lombok.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
@@ -17,4 +22,13 @@ public class Profile {
   private String name;
   private String surname;
   private String birthDate;
+
+  @ManyToMany(mappedBy = "directors")
+  private Set<Movie> director;
+
+  @ManyToMany(mappedBy = "actors")
+  private Set<Movie> actor;
+
+  @ManyToMany(mappedBy = "producers")
+  private Set<Movie> producer;
 }
