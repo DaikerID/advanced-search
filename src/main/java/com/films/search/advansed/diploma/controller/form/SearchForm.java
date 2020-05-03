@@ -1,4 +1,4 @@
-package com.films.search.advansed.diploma.model.controller.form;
+package com.films.search.advansed.diploma.controller.form;
 
 import lombok.Data;
 

@@ -7,7 +7,7 @@
     <title>Hello</title>
 </head>
 <body>
-<h1>${message}</h1>
+<h1>${header_label}</h1>
 <h2>Load time - <%=LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yy HH:mm"))%>
 </h2>
 

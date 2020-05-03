@@ -1,4 +1,4 @@
-package com.films.search.advansed.diploma.model.entity;
+package com.films.search.advansed.diploma.database.model;
 
 import java.time.LocalDate;
 import java.util.Set;
