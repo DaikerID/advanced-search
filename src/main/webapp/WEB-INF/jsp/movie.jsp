@@ -3,6 +3,7 @@
 <%@ page import="com.films.search.advansed.diploma.database.model.Profile" %>
 <%@ page import="com.films.search.advansed.diploma.database.model.Tag" %>
 <%@ page import="java.time.format.FormatStyle" %>
+<%@ page import="java.util.Iterator" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <%@ include file="fragments/head.jsp" %>
@@ -38,12 +39,12 @@
 
         <tr>
             <td>Genre:</td>
-            <td><%=getGenresList(movie)%>
+            <td><%=getGenreList(movie)%>
             </td>
         </tr>
         <tr>
             <td>Tags:</td>
-            <td><%=getGenresList(movie)%>
+            <td><%=getTagList(movie)%>
             </td>
         </tr>
         </tbody>
@@ -118,20 +119,26 @@
     <%}%>
 
     <%!
-        public String getGenresList(Movie movie) {
+        public String getGenreList(Movie movie) {
             StringBuilder genres = new StringBuilder();
-            for (Genre genre : movie.getGenres()) {
-                genres.append(genre.toString()).append(" ");
+            Iterator<Genre> iterator = movie.getGenres().iterator();
+            while (iterator.hasNext()) {
+                genres.append(iterator.next().toString());
+                if (iterator.hasNext()) {
+                    genres.append(", ");
+                }
             }
             return genres.toString().equals("") ? "none" : genres.toString();
         }
-    %>
 
-    <%!
         public String getTagList(Movie movie) {
             StringBuilder tags = new StringBuilder();
-            for (Tag tag : movie.getTags()) {
-                tags.append(tag.toString()).append(" ");
+            Iterator<Tag> iterator = movie.getTags().iterator();
+            while (iterator.hasNext()) {
+                tags.append(iterator.next().toString());
+                if (iterator.hasNext()) {
+                    tags.append(", ");
+                }
             }
             return tags.toString().equals("") ? "none" : tags.toString();
         }

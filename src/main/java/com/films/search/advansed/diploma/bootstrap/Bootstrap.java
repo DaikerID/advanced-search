@@ -1,5 +1,6 @@
 package com.films.search.advansed.diploma.bootstrap;
 
+import com.films.search.advansed.diploma.database.model.Genre;
 import com.films.search.advansed.diploma.database.model.Movie;
 import com.films.search.advansed.diploma.database.model.Profile;
 import com.films.search.advansed.diploma.database.repository.MovieRepository;
@@ -26,12 +27,26 @@ public class Bootstrap implements CommandLineRunner {
 
   private void initData() {
 
-    Profile profile = Profile.builder().id(1L).birthDate(LocalDate.now()).name("Leonardo")
-        .surname("Dicaprio").build();
+    Profile profile = Profile.builder()
+        .id(1L)
+        .birthDate(LocalDate.now())
+        .name("Leonardo")
+        .surname("Dicaprio")
+        .build();
+
     profileRepository.save(profile);
 
-    Movie survivorMovie = Movie.builder().id(1L).actors(Set.of(profile)).directors(Set.of(profile))
-        .name("Survivor").premierDate(LocalDate.now()).lengthInMinutes(130).country("USA").build();
+    Movie survivorMovie = Movie.builder()
+        .id(1L)
+        .actors(Set.of(profile))
+        .directors(Set.of(profile))
+        .name("Survivor")
+        .premierDate(LocalDate.now())
+        .lengthInMinutes(130)
+        .country("USA")
+        .genres(Set.of(Genre.ADVENTURE, Genre.ACTION))
+        .build();
+
     movieRepository.save(survivorMovie);
   }
 }
