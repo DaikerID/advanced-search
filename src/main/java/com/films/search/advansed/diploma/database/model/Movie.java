@@ -38,18 +38,18 @@ public class Movie {
   @ManyToMany
   @JoinTable(name = "directors",
       joinColumns = {@JoinColumn(name = "movie_id")},
-      inverseJoinColumns = {@JoinColumn(name = "profile_id")} )
+      inverseJoinColumns = {@JoinColumn(name = "profile_id")})
   private Set<Profile> directors;
 
   @ManyToMany
   @JoinTable(name = "actors",
       joinColumns = {@JoinColumn(name = "movie_id")},
-      inverseJoinColumns = {@JoinColumn(name = "profile_id")} )
+      inverseJoinColumns = {@JoinColumn(name = "profile_id")})
   private Set<Profile> actors;
 
   @ManyToMany
   @JoinTable(name = "producers",
       joinColumns = {@JoinColumn(name = "movie_id")},
-      inverseJoinColumns = {@JoinColumn(name = "profile_id")} )
+      inverseJoinColumns = {@JoinColumn(name = "profile_id")})
   private Set<Profile> producers;
 }

@@ -1,5 +1,6 @@
 package com.films.search.advansed.diploma.database.model;
 
+import java.time.LocalDate;
 import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -17,11 +18,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class Profile {
+
   @Id
   private Long id;
   private String name;
   private String surname;
-  private String birthDate;
+  private LocalDate birthDate;
 
   @ManyToMany(mappedBy = "directors")
   private Set<Movie> director;

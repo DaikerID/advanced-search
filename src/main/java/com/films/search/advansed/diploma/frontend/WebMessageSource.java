@@ -8,9 +8,10 @@ import org.springframework.stereotype.Component;
 @Component
 @AllArgsConstructor
 public class WebMessageSource {
+
   private MessageSource messageSource;
 
-  public String getMessage(WebMessageCode code, Object... args){
-    return messageSource.getMessage(String.valueOf(code),args, Locale.getDefault());
+  public String getMessage(WebMessageCode code, Object... args) {
+    return messageSource.getMessage(String.valueOf(code), args, Locale.getDefault());
   }
 }

@@ -1,5 +1,6 @@
 package com.films.search.advansed.diploma.controller;
 
+import com.films.search.advansed.diploma.controller.form.AdvancedSearchForm;
 import com.films.search.advansed.diploma.controller.form.SearchForm;
 import com.films.search.advansed.diploma.frontend.WebMessageCode;
 import com.films.search.advansed.diploma.frontend.WebMessageSource;
@@ -16,16 +17,23 @@ public class HomePageController {
 
   @GetMapping(value = "/")
   public ModelAndView printHello() {
-    ModelAndView model = new ModelAndView("hello");
-    model.addObject("header_label", messageSource.getMessage(WebMessageCode.HEADER_LABEL));
+    ModelAndView model = new ModelAndView("index");
+    model.addObject("header", messageSource.getMessage(WebMessageCode.HEADER));
     return model;
   }
 
   @GetMapping("/search")
   public ModelAndView searchUser(SearchForm searchForm) {
-    ModelAndView model = new ModelAndView("hello");
-    model.addObject("header_label", messageSource.getMessage(WebMessageCode.HEADER_LABEL));
+    ModelAndView model = new ModelAndView("index");
+    model.addObject("header", messageSource.getMessage(WebMessageCode.HEADER));
     model.addObject("search", searchForm.getSearchLine());
+    return model;
+  }
+
+  @GetMapping("/advanced-search")
+  public ModelAndView searchUser(AdvancedSearchForm searchForm) {
+    ModelAndView model = new ModelAndView("index");
+    model.addObject("header", messageSource.getMessage(WebMessageCode.HEADER));
     return model;
   }
 }
