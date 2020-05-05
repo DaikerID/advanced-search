@@ -29,7 +29,7 @@ public class Bootstrap implements CommandLineRunner {
     Profile profile = Profile.builder().id(1L).birthDate(LocalDate.now()).name("Leonardo").surname("Dicaprio").build();
     profileRepository.save(profile);
 
-    Movie survivorMovie = Movie.builder().id(1L).actors(Set.of(profile)).directors(Set.of(profile)).name("Survivor").build();
+    Movie survivorMovie = Movie.builder().id(1L).actors(Set.of(profile)).directors(Set.of(profile)).name("Survivor").premierDate(LocalDate.now()).build();
     movieRepository.save(survivorMovie);
   }
 }

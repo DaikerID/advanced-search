@@ -51,7 +51,61 @@
             <td><%=movie.getName()%>
             </td>
             <td><%=movie.getPremierDate()
-                    .format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)%>
+                    .format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG))%>
+            </td>
+        </tr>
+        <%}%>
+        </tbody>
+    </table>
+    <%}%>
+
+    <%if (profile.getDirector().size() > 0) { %>
+    <div>
+        <h2>
+            <br>Director
+        </h2>
+    </div>
+    <table>
+        <thead>
+        <tr>
+            <th>Movie name</th>
+            <th>Premier date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% for (Movie movie : profile.getDirector()) {%>
+        <tr>
+            <td><%=movie.getName()%>
+            </td>
+            <td><%=movie.getPremierDate()
+                    .format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG))%>
+            </td>
+        </tr>
+        <%}%>
+        </tbody>
+    </table>
+    <%}%>
+
+    <%if (profile.getProducer().size() > 0) { %>
+    <div>
+        <h2>
+            <br>Producer
+        </h2>
+    </div>
+    <table>
+        <thead>
+        <tr>
+            <th>Movie name</th>
+            <th>Premier date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% for (Movie movie : profile.getProducer()) {%>
+        <tr>
+            <td><%=movie.getName()%>
+            </td>
+            <td><%=movie.getPremierDate()
+                    .format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG))%>
             </td>
         </tr>
         <%}%>
