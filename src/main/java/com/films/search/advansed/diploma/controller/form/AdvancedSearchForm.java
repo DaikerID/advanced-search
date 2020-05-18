@@ -12,6 +12,10 @@ public class AdvancedSearchForm {
   private String countries;
   private String tags;
   private String genres;
-  private String releaseDateLocalDateInterval;
-  private String movieLengthDurationInterval;
+  private String releaseDayStart;
+  private String releaseMonthStart;
+  private String releaseYearStart;
+  private String releaseDayEnd;
+  private String releaseMonthEnd;
+  private String releaseYearEnd;
 }

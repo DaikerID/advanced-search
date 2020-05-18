@@ -33,12 +33,26 @@ public class Bootstrap implements CommandLineRunner {
         .name("Leonardo")
         .surname("Dicaprio")
         .build();
+    Profile profile1 = Profile.builder()
+        .id(2L)
+        .birthDate(LocalDate.now())
+        .name("2222")
+        .surname("Dicaprio")
+        .build();
+    Profile profile2 = Profile.builder()
+        .id(3L)
+        .birthDate(LocalDate.now())
+        .name("33333")
+        .surname("Dicaprio")
+        .build();
 
     profileRepository.save(profile);
+    profileRepository.save(profile1);
+    profileRepository.save(profile2);
 
     Movie survivorMovie = Movie.builder()
         .id(1L)
-        .actors(Set.of(profile))
+        .actors(Set.of(profile,profile1,profile2))
         .directors(Set.of(profile))
         .name("Survivor")
         .premierDate(LocalDate.now())
@@ -46,7 +60,30 @@ public class Bootstrap implements CommandLineRunner {
         .country("USA")
         .genres(Set.of(Genre.ADVENTURE, Genre.ACTION))
         .build();
-
     movieRepository.save(survivorMovie);
+
+    Movie survivor2Movie = Movie.builder()
+        .id(2L)
+        .actors(Set.of(profile,profile2))
+        .directors(Set.of(profile))
+        .name("Survivor2")
+        .premierDate(LocalDate.now())
+        .lengthInMinutes(130)
+        .country("USA")
+        .genres(Set.of(Genre.ADVENTURE, Genre.ACTION))
+        .build();
+    movieRepository.save(survivor2Movie);
+
+    Movie survivor3Movie = Movie.builder()
+        .id(3L)
+        .actors(Set.of(profile1,profile2))
+        .directors(Set.of(profile))
+        .name("Survivor3")
+        .premierDate(LocalDate.now())
+        .lengthInMinutes(130)
+        .country("USA")
+        .genres(Set.of(Genre.ADVENTURE, Genre.ACTION))
+        .build();
+    movieRepository.save(survivor3Movie);
   }
 }

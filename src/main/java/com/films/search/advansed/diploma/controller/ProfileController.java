@@ -16,13 +16,6 @@ public class ProfileController {
 
   private ProfileService profileService;
 
-  @RequestMapping(value = "/profile")
-  public ModelAndView show(){
-    ModelAndView model = new ModelAndView("profile");
-    model.addObject("profile",profileService.findAll().get(0));
-    return model;
-  }
-
   @RequestMapping(value = "/profile/")
   public ModelAndView getUser(@RequestParam Long profileId, HttpServletRequest request) {
     ModelAndView model = new ModelAndView("profile");
