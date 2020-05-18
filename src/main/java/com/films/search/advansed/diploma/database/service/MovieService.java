@@ -1,20 +1,19 @@
 package com.films.search.advansed.diploma.database.service;
 
-import static com.films.search.advansed.diploma.search.MovieSearchSpecificationHandler.*;
+import static com.films.search.advansed.diploma.LocalDateTimeUtils.parseInterval;
+import static com.films.search.advansed.diploma.search.MovieSearchSpecificationHandler.hasCountryLike;
+import static com.films.search.advansed.diploma.search.MovieSearchSpecificationHandler.hasNameLike;
+import static com.films.search.advansed.diploma.search.MovieSearchSpecificationHandler.hasPremierDateGreaterThan;
+import static com.films.search.advansed.diploma.search.MovieSearchSpecificationHandler.hasPremierDateLessThan;
 
 import com.films.search.advansed.diploma.controller.form.AdvancedSearchForm;
 import com.films.search.advansed.diploma.controller.form.AdvancedSearchQuery;
-import com.films.search.advansed.diploma.controller.form.entities.LocalDateInterval;
 import com.films.search.advansed.diploma.database.model.Genre;
 import com.films.search.advansed.diploma.database.model.Movie;
 import com.films.search.advansed.diploma.database.model.Tag;
 import com.films.search.advansed.diploma.database.repository.MovieRepository;
-import com.films.search.advansed.diploma.search.MovieSearchSpecificationHandler;
-import java.time.LocalDate;
-import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Example;
@@ -28,27 +27,8 @@ public class MovieService {
   private MovieRepository movieRepository;
 
   public AdvancedSearchQuery fillExampleEntity(AdvancedSearchForm advancedSearchForm) {
-    LocalDate start;
-    try {
-      start = LocalDate.of(
-          Integer.parseInt(advancedSearchForm.getReleaseYearStart()),
-          Month.valueOf(advancedSearchForm.getReleaseMonthStart()),
-          Integer.parseInt(advancedSearchForm.getReleaseDayStart()));
-    } catch (NumberFormatException e) {
-      start = null;
-    }
 
-    LocalDate end;
-    try {
-      end = LocalDate.of(
-          Integer.parseInt(advancedSearchForm.getReleaseYearStart()),
-          Month.valueOf(advancedSearchForm.getReleaseMonthStart()),
-          Integer.parseInt(advancedSearchForm.getReleaseDayStart()));
-    } catch (NumberFormatException e) {
-      end = Objects.isNull(start) ? null : LocalDate.now();
-    }
-
-    //TODO transform
+    //TODO transform with arrays
     AdvancedSearchQuery advancedSearchQuery = AdvancedSearchQuery.builder()
         .movieName(advancedSearchForm.getMovieName().trim())
         .countries(advancedSearchForm.getCountries().trim())
@@ -57,8 +37,7 @@ public class MovieService {
         .producersName(advancedSearchForm.getProducersName().trim())
         .genres(Genre.valueOf(advancedSearchForm.getGenres()))
         .tags(Tag.valueOf(advancedSearchForm.getTags()))
-        .releaseDateLocalDateInterval(
-            new LocalDateInterval(start, end))
+        .releaseDateLocalDateInterval(parseInterval(advancedSearchForm))
         .build();
     return advancedSearchQuery;
   }
@@ -86,6 +65,8 @@ public class MovieService {
   public List<Movie> findAllByQuery(AdvancedSearchQuery advancedSearchQuery) {
     return movieRepository.findAll(Specification
         .where(hasNameLike(advancedSearchQuery)
-            .and(hasCountryLike(advancedSearchQuery))));
+            .and(hasCountryLike(advancedSearchQuery)
+            .and(hasPremierDateGreaterThan(advancedSearchQuery))
+            .and(hasPremierDateLessThan(advancedSearchQuery)))));
   }
 }

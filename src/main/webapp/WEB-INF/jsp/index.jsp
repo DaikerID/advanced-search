@@ -56,7 +56,7 @@
 
         <p><label>Choose a begining of release date interval:</label>
             <select name="releaseDayStart">
-                <option value="NONE"> -</option>
+                <option value="-"> -</option>
                 <% for (int i = 1; i <= 31; i++) {%>
                 <option value="<%=i%>"><%=i%>
                 </option>
@@ -64,7 +64,7 @@
             </select>
 
             <select name="releaseMonthStart">
-                <option value="NONE"> -</option>
+                <option value="-"> -</option>
                 <%
                     Map<Month, String> monthsMap = (HashMap<Month, String>) request
                             .getAttribute("monthsMap");
@@ -109,71 +109,70 @@
         <p><input type="submit" value="Search"></p>
     </form>
 </div>
-<div>
-
-</div>
-<div>
-    <% List<Movie> movies = (ArrayList<Movie>) request.getAttribute("movies");
-        if (movies.size() > 0) {%>
-    <h2>Movies</h2>
-    <table>
-        <thead>
-        <tr>
-            <th>#</th>
-            <th>Movie Name</th>
-            <th>Year</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        <% for (Movie movie : movies) {%>
-        <tr>
-            <td><%=movies.indexOf(movie)%>
-            </td>
-            <td><%=movie.getName()%>
-            </td>
-            <td><%=movie.getPremierDate().getYear()%>
-            </td>
-            <td>
-                <a href="/movie/?movieId=<%=movie.getId()%>">Movie Page</a>
-            </td>
-        </tr>
+<div class="results">
+    <div>
+        <% List<Movie> movies = (List<Movie>) request.getAttribute("movies");
+            if (movies.size() > 0) {%>
+        <h2>Movies</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Movie Name</th>
+                <th>Year</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <% for (Movie movie : movies) {%>
+            <tr>
+                <td><%=movies.indexOf(movie) + 1%>
+                </td>
+                <td><%=movie.getName()%>
+                </td>
+                <td><%=movie.getPremierDate().getYear()%>
+                </td>
+                <td>
+                    <a href="/movie/?movieId=<%=movie.getId()%>">Movie Page</a>
+                </td>
+            </tr>
+            <%}%>
+            </tbody>
+        </table>
         <%}%>
-        </tbody>
-    </table>
-    <%}%>
-</div>
+    </div>
 
-<div>
-    <%
-        ArrayList<Profile> profiles = (ArrayList<Profile>) request.getAttribute("profiles");
-        if (profiles.size() > 0) {%>
-    <h2>Profiles</h2>
-    <table>
-        <thead>
-        <tr>
-            <th>#</th>
-            <th>Profile</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        <% for (Profile profile : profiles) {%>
-        <tr>
-            <td><%=profiles.indexOf(profile)%>
-            </td>
-            <td><%=profile.getName().concat(" ").concat(profile.getSurname())%>
-            </td>
-            <td>
-                <a href="/profile/?profileId=<%=profile.getId()%>">Profile Page</a>
-            </td>
-        </tr>
-        <%}%>
-        </tbody>
-    </table>
-    <%
-        }
-    %>
+    <div>
+        <%
+            List<Profile> profiles = (List<Profile>) request.getAttribute("profiles");
+            if (profiles.size() > 0) {%>
+        <h2>Profiles</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Profile</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <% for (Profile profile : profiles) {%>
+            <tr>
+                <td><%=profiles.indexOf(profile) + 1%>
+                </td>
+                <td><%=profile.getName().concat(" ").concat(profile.getSurname())%>
+                </td>
+                <td>
+                    <a href="/profile/?profileId=<%=profile.getId()%>">Profile Page</a>
+                </td>
+            </tr>
+            <%}%>
+            </tbody>
+        </table>
+        <%
+            }
+        %>
+    </div>
 </div>
 </body>
 </html>
