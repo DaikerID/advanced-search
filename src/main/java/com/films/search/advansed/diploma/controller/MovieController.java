@@ -15,7 +15,7 @@ public class MovieController {
   MovieService movieService;
 
   @RequestMapping(value = "/movie/")
-  public ModelAndView getUser(@RequestParam Long movieId) {
+  public ModelAndView getMovie(@RequestParam Long movieId) {
     ModelAndView model = new ModelAndView("movie");
     Optional<Movie> profileOptional = movieService.findById(movieId);
 

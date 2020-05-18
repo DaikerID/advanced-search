@@ -1,17 +1,24 @@
 package com.films.search.advansed.diploma.database.service;
 
+import static com.films.search.advansed.diploma.search.MovieSearchSpecificationHandler.*;
+
 import com.films.search.advansed.diploma.controller.form.AdvancedSearchForm;
 import com.films.search.advansed.diploma.controller.form.AdvancedSearchQuery;
+import com.films.search.advansed.diploma.controller.form.entities.LocalDateInterval;
+import com.films.search.advansed.diploma.database.model.Genre;
 import com.films.search.advansed.diploma.database.model.Movie;
-import com.films.search.advansed.diploma.database.model.Profile;
+import com.films.search.advansed.diploma.database.model.Tag;
 import com.films.search.advansed.diploma.database.repository.MovieRepository;
+import com.films.search.advansed.diploma.search.MovieSearchSpecificationHandler;
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Example;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -20,8 +27,7 @@ public class MovieService {
 
   private MovieRepository movieRepository;
 
-  public Movie fillExampleEntity(AdvancedSearchForm advancedSearchForm) {
-    //TODO transform
+  public AdvancedSearchQuery fillExampleEntity(AdvancedSearchForm advancedSearchForm) {
     LocalDate start;
     try {
       start = LocalDate.of(
@@ -42,7 +48,19 @@ public class MovieService {
       end = Objects.isNull(start) ? null : LocalDate.now();
     }
 
-    return Movie.builder().build();
+    //TODO transform
+    AdvancedSearchQuery advancedSearchQuery = AdvancedSearchQuery.builder()
+        .movieName(advancedSearchForm.getMovieName().trim())
+        .countries(advancedSearchForm.getCountries().trim())
+        .actorsName(advancedSearchForm.getActorsName().trim())
+        .directorsName(advancedSearchForm.getDirectorsName().trim())
+        .producersName(advancedSearchForm.getProducersName().trim())
+        .genres(Genre.valueOf(advancedSearchForm.getGenres()))
+        .tags(Tag.valueOf(advancedSearchForm.getTags()))
+        .releaseDateLocalDateInterval(
+            new LocalDateInterval(start, end))
+        .build();
+    return advancedSearchQuery;
   }
 
   public List<Movie> search(AdvancedSearchQuery searchQuery) {
@@ -59,5 +77,13 @@ public class MovieService {
 
   public Optional<Movie> findById(Long movieId) {
     return movieRepository.findById(movieId);
+  }
+
+  public List<Movie> findAllByNameContains(String name) {
+    return new ArrayList<>(movieRepository.findAllByNameContains(name));
+  }
+
+  public List<Movie> findAllByQuery(AdvancedSearchQuery advancedSearchQuery) {
+      return movieRepository.findAll(Specification.where(hasNameLike(advancedSearchQuery)));
   }
 }
