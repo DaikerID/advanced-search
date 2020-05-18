@@ -69,7 +69,7 @@ public class Bootstrap implements CommandLineRunner {
         .name("Survivor2")
         .premierDate(LocalDate.now())
         .lengthInMinutes(130)
-        .country("USA")
+        .country("Russia")
         .genres(Set.of(Genre.ADVENTURE, Genre.ACTION))
         .build();
     movieRepository.save(survivor2Movie);

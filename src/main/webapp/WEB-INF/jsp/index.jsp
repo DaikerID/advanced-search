@@ -145,7 +145,8 @@
 </div>
 
 <div>
-    <% List<Profile> profiles = (ArrayList<Profile>) request.getAttribute("profiles");
+    <%
+        ArrayList<Profile> profiles = (ArrayList<Profile>) request.getAttribute("profiles");
         if (profiles.size() > 0) {%>
     <h2>Profiles</h2>
     <table>
@@ -170,7 +171,9 @@
         <%}%>
         </tbody>
     </table>
-    <%}%>
+    <%
+        }
+    %>
 </div>
 </body>
 </html>
