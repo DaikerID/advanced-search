@@ -1,3 +1,3 @@
 <head>
-    <title>Advanced search</title>
+    <title>what to see</title>
 </head>

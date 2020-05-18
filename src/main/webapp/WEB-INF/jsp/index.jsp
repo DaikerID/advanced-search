@@ -17,10 +17,12 @@
 <%@ include file="fragments/header.jsp" %>
 <div>
     <form action="/search">
+        <h2>Search</h2>
         <p><input type="search" name="searchLine" placeholder="Find movie" required>
             <input type="submit" value="Search"></p>
     </form>
     <form action="/advanced-search">
+        <h2>Advanced search</h2>
         <p><input type="search" name="movieName" placeholder="movieName">
         <p><input type="search" name="actorsName" placeholder="actorsName">
         <p><input type="search" name="directorsName" placeholder="directorsName">
@@ -75,7 +77,7 @@
             <select name="releaseYearStart">
                 <option value="-"> -</option>
                 <% int firstFilmYear = 1895;
-                    for (int i = firstFilmYear; i <= LocalDate.now().getYear(); i++) {%>
+                    for (int i = LocalDate.now().getYear(); i >= firstFilmYear; i--) {%>
                 <option value="<%=i%>"><%=i%>
                 </option>
                 <%}%>
@@ -98,7 +100,7 @@
             </select>
             <select name="releaseYearEnd">
                 <option value="-"> -</option>
-                <% for (int i = firstFilmYear; i <= LocalDate.now().getYear(); i++) {%>
+                <% for (int i = LocalDate.now().getYear(); i >= firstFilmYear; i--) {%>
                 <option value="<%=i%>"><%=i%>
                 </option>
                 <%}%>
