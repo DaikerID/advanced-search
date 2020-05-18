@@ -1,7 +1,7 @@
 package com.films.search.advansed.diploma;
 
 import com.films.search.advansed.diploma.controller.form.AdvancedSearchForm;
-import com.films.search.advansed.diploma.controller.form.entities.LocalDateInterval;
+import com.films.search.advansed.diploma.search.entities.LocalDateInterval;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Objects;

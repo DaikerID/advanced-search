@@ -1,9 +1,8 @@
 package com.films.search.advansed.diploma.search;
 
-import com.films.search.advansed.diploma.controller.form.AdvancedSearchQuery;
+import com.films.search.advansed.diploma.search.entities.AdvancedSearchQuery;
 import com.films.search.advansed.diploma.database.model.Movie;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import org.springframework.data.jpa.domain.Specification;
 
 public class MovieSearchSpecificationHandler {

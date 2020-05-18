@@ -1,4 +1,4 @@
-package com.films.search.advansed.diploma.controller.form.entities;
+package com.films.search.advansed.diploma.search.entities;
 
 import java.time.Duration;
 import lombok.Data;
