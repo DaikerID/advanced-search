@@ -33,12 +33,12 @@ public class ProfileService {
           profileSet.addAll(findAllByNameOrSurname(names[0], names[1]));
         }
         if (profileSet.size() == 0) {
-          profileSet.addAll(findByEachWord(names));
+          profileSet.addAll(findAllByEachWord(names));
         }
         return new ArrayList<>(profileSet);
 
       } else {
-        return new ArrayList<>(findByEachWord(names));
+        return new ArrayList<>(findAllByEachWord(names));
       }
     }
     return new ArrayList<>(findAllByNameOrSurname(searchName, searchName));
@@ -50,20 +50,13 @@ public class ProfileService {
             .and(hasSurnameLike(surname)))));
   }
 
-  private Set<Profile> findAllByNameOrSurname(String name, String surname) {
-    return new HashSet<>(profileRepository.findAll(Specification
+  private List<Profile> findAllByNameOrSurname(String name, String surname) {
+    return profileRepository.findAll(Specification
         .where(hasNameLike(name)
-            .or(hasSurnameLike(surname)))));
+            .or(hasSurnameLike(surname))));
   }
 
-  private Set<Profile> findByEachWord(String[] filters) {
-    Set<Profile> profileHashSet = new HashSet<>();
-    for (String currentName : filters) {
-      profileHashSet.addAll(
-          profileRepository.findAll(Specification
-              .where(hasNameLike(currentName)
-                  .or(hasSurnameLike(currentName)))));
-    }
-    return profileHashSet;
+  private List<Profile> findAllByEachWord(String[] filters) {
+    return profileRepository.findAll(hasNameOrSurnameContains(filters));
   }
 }
