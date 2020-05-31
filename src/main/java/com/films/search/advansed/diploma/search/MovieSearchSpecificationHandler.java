@@ -6,6 +6,7 @@ import com.films.search.advansed.diploma.database.model.Tag;
 import com.films.search.advansed.diploma.search.entities.AdvancedSearchQuery;
 import java.time.LocalDate;
 import java.util.Set;
+import javax.persistence.criteria.Predicate;
 import org.springframework.data.jpa.domain.Specification;
 
 public class MovieSearchSpecificationHandler {
@@ -55,45 +56,34 @@ public class MovieSearchSpecificationHandler {
   }
 
   public static Specification<Movie> hasGenres(AdvancedSearchQuery advancedSearchQuery) {
+    //TODO refactor this
+    Set<Genre> genres = Set.of(advancedSearchQuery.getGenres());
     return (Specification<Movie>) (root, query, cb) -> {
-      if (!advancedSearchQuery.getGenres().equals(Genre.NONE)) {
-        return cb.isMember(advancedSearchQuery.getGenres(), root.get("genres"));
-      } else {
-        return cb.like(root.get("name"), "%");
+      if (!advancedSearchQuery.getGenres().equals(Genre.NONE)){
+        Predicate predicate = null;
+        for (Genre genre : genres){
+          predicate = predicate == null ? cb.isMember(genre, root.get("genres")) :
+              cb.and(predicate, cb.isMember(genre, root.get("genres")));
+        }
+        return predicate;
       }
+      return cb.like(root.get("name"), "%");
     };
   }
 
   public static Specification<Movie> hasTags(AdvancedSearchQuery advancedSearchQuery) {
+    //TODO refactor this
+    Set<Tag> tags = Set.of(advancedSearchQuery.getTags());
     return (Specification<Movie>) (root, query, cb) -> {
       if (!advancedSearchQuery.getTags().equals(Tag.NONE)) {
-        return cb.isMember(advancedSearchQuery.getTags(), root.get("tags"));
-      } else {
-        return cb.like(root.get("name"), "%");
+        Predicate predicate = null;
+        for (Tag genre : tags) {
+          predicate = predicate == null ? cb.isMember(genre, root.get("tags")) :
+              cb.and(predicate, cb.isMember(genre, root.get("tags")));
+        }
+        return predicate;
       }
+      return cb.like(root.get("name"), "%");
     };
   }
-
-  public static Specification<Movie> hasGenres2(AdvancedSearchQuery advancedSearchQuery) {
-    Set<Genre> genres = Set.of(advancedSearchQuery.getGenres(), Genre.ADVENTURE);
-    return (Specification<Movie>) (root, query, cb) -> {
-      if (!advancedSearchQuery.getGenres().equals(Genre.NONE)) {
-        return cb.isMember(genres, root.get("genres"));
-      } else {
-        return cb.like(root.get("name"), "%");
-      }
-    };
-  }
-
-//  public static Specification<Movie> hasActor(AdvancedSearchQuery advancedSearchQuery) {
-//    return (Specification<Movie>) (root, query, cb) -> {
-//      if (!advancedSearchQuery.getGenres().equals(Genre.NONE)) {
-//        cb.createQuery(Profile.class);
-//        final Path<Genre> genres = root.<Genre> get("genres");
-//        return genres.in(Set.of(advancedSearchQuery.getGenres(), Genre.ADVENTURE));
-////        return cb.isMember(Set.of(advancedSearchQuery.getGenres(), Genre.ADVENTURE), root.get("genres"));
-//      } else {
-//        return cb.like(root.get("name"), "%");
-//      }
-//    };
 }

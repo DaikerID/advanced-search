@@ -32,7 +32,7 @@ public class MovieService {
         .and(hasCountryLike(advancedSearchQuery))
         .and(hasPremierDateGreaterThan(advancedSearchQuery))
         .and(hasPremierDateLessThan(advancedSearchQuery))
-        .and(hasGenres2(advancedSearchQuery))
+        .and(hasGenres(advancedSearchQuery))
         .and(hasTags(advancedSearchQuery)));
   }
 }
