@@ -20,10 +20,6 @@ public class ProfileService {
     return profileRepository.findById(profileId);
   }
 
-  public List<Profile> findAll() {
-    return profileRepository.findAll();
-  }
-
   public List<Profile> findAllProfilesByNameContains(String searchName) {
     if (searchName.contains(" ")) {
       String names[] = searchName.split(" ");

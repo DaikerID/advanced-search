@@ -42,7 +42,7 @@ public class HomePageController {
   public ModelAndView searchUser(AdvancedSearchForm searchForm) {
     ModelAndView model = new ModelAndView();
     prepareForAdvancedSearchForm(model);
-    prepareModelForShowResults(model, searchService.findAllMoviesByExample(searchForm), List.of());
+    prepareModelForShowResults(model, searchService.findAllMoviesByAdvancedForm(searchForm), List.of());
     return model;
   }
 

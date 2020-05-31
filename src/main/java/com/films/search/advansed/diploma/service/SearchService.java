@@ -17,7 +17,7 @@ public class SearchService {
   MovieService movieService;
   ProfileService profileService;
 
-  public List<Movie> findAllMoviesByExample(AdvancedSearchForm searchForm) {
+  public List<Movie> findAllMoviesByAdvancedForm(AdvancedSearchForm searchForm) {
     return movieService.findAllByQuery(AdvancedSearchQuery.build(searchForm));
   }
 

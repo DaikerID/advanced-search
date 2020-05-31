@@ -2,14 +2,10 @@ package com.films.search.advansed.diploma.frontend;
 
 import com.films.search.advansed.diploma.database.model.Genre;
 import com.films.search.advansed.diploma.database.model.Tag;
-import java.time.LocalDate;
 import java.time.Month;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import javax.persistence.Tuple;
 import lombok.AllArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;

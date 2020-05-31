@@ -58,7 +58,7 @@ public class Bootstrap implements CommandLineRunner {
         .premierDate(LocalDate.now().minusYears(10))
         .lengthInMinutes(130)
         .country("USA")
-        .genres(Set.of(Genre.ADVENTURE, Genre.ACTION))
+        .genres(Set.of(Genre.ADVENTURE, Genre.COMEDY))
         .build();
     movieRepository.save(survivorMovie);
 
@@ -70,7 +70,7 @@ public class Bootstrap implements CommandLineRunner {
         .premierDate(LocalDate.now().minusYears(5))
         .lengthInMinutes(130)
         .country("Russia")
-        .genres(Set.of(Genre.ADVENTURE, Genre.ACTION))
+        .genres(Set.of(Genre.ADVENTURE, Genre.HORROR))
         .build();
     movieRepository.save(survivor2Movie);
 

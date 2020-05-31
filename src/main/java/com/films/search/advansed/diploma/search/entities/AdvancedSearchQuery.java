@@ -25,7 +25,7 @@ public class AdvancedSearchQuery {
   public static AdvancedSearchQuery build(AdvancedSearchForm advancedSearchForm) {
 
     //TODO transform with arrays
-    AdvancedSearchQuery advancedSearchQuery = AdvancedSearchQuery.builder()
+    return AdvancedSearchQuery.builder()
         .movieName(advancedSearchForm.getMovieName().trim())
         .countries(advancedSearchForm.getCountries().trim())
         .actorsName(advancedSearchForm.getActorsName().trim())
@@ -35,6 +35,5 @@ public class AdvancedSearchQuery {
         .tags(Tag.valueOf(advancedSearchForm.getTags()))
         .releaseDateLocalDateInterval(parseInterval(advancedSearchForm))
         .build();
-    return advancedSearchQuery;
   }
 }
