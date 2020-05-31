@@ -16,8 +16,8 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 public class Bootstrap implements CommandLineRunner {
 
-  private ProfileRepository profileRepository;
-  private MovieRepository movieRepository;
+  private final ProfileRepository profileRepository;
+  private final MovieRepository movieRepository;
 
   @Override
   @Transactional

@@ -11,10 +11,19 @@ import org.springframework.data.jpa.domain.Specification;
 
 public class MovieSearchSpecificationHandler {
 
+  public static Specification<Movie> hasNameLike(String filter) {
+    return (Specification<Movie>) (root, query, cb) -> {
+      if (filter != null) {
+        return cb.like(cb.upper(root.get("name")), "%" + filter.toUpperCase() + "%");
+      }
+      return cb.like(root.get("name"), "%");
+    };
+  }
+
   public static Specification<Movie> hasNameLike(AdvancedSearchQuery advancedSearchQuery) {
     return (Specification<Movie>) (root, query, cb) -> {
       if (advancedSearchQuery.getMovieName() != null) {
-        return cb.like(root.get("name"), "%" + advancedSearchQuery.getMovieName() + "%");
+        return cb.like(cb.upper(root.get("name")), "%" + advancedSearchQuery.getMovieName().toUpperCase() + "%");
       }
       return cb.like(root.get("name"), "%");
     };
@@ -23,7 +32,7 @@ public class MovieSearchSpecificationHandler {
   public static Specification<Movie> hasCountryLike(AdvancedSearchQuery advancedSearchQuery) {
     return (Specification<Movie>) (root, query, cb) -> {
       if (advancedSearchQuery.getCountries() != null) {
-        return cb.like(root.get("country"), "%" + advancedSearchQuery.getCountries() + "%");
+        return cb.like(cb.upper(root.get("country")), "%" + advancedSearchQuery.getCountries().toUpperCase() + "%");
       }
       return cb.like(root.get("country"), "%");
     };

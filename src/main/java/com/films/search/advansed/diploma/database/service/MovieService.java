@@ -23,7 +23,7 @@ public class MovieService {
   }
 
   public List<Movie> findAllByNameContains(String name) {
-    return new ArrayList<>(movieRepository.findAllByNameContains(name));
+    return new ArrayList<>(movieRepository.findAll(Specification.where(hasNameLike(name))));
   }
 
   public List<Movie> findAllByQuery(AdvancedSearchQuery advancedSearchQuery) {

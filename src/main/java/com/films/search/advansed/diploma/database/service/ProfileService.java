@@ -1,5 +1,7 @@
 package com.films.search.advansed.diploma.database.service;
 
+import static com.films.search.advansed.diploma.search.ProfileSpecificationHandler.*;
+
 import com.films.search.advansed.diploma.database.model.Profile;
 import com.films.search.advansed.diploma.database.repository.ProfileRepository;
 import java.util.ArrayList;
@@ -8,6 +10,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import lombok.AllArgsConstructor;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -23,19 +26,28 @@ public class ProfileService {
   public List<Profile> findAllProfilesByNameContains(String searchName) {
     if (searchName.contains(" ")) {
       String names[] = searchName.split(" ");
+
       if (names.length == 2) {
-        return new ArrayList<>(
-            profileRepository.findAllByNameContainsAndSurnameContains(names[0], names[1]));
+        return
+            profileRepository.findAll(Specification
+                .where(hasNameLike(names[0])
+                    .and(hasSurnameLike(names[1]))));
       } else {
+
         Set<Profile> profileHashSet = new HashSet<>();
         for (String currentName : names) {
           profileHashSet.addAll(
-              profileRepository.findAllByNameContainsOrSurnameContains(currentName, currentName));
+              profileRepository.findAll(Specification
+                  .where(hasNameLike(currentName)
+                      .or(hasSurnameLike(currentName)))));
         }
+
         return new ArrayList<>(profileHashSet);
       }
     }
-    return new ArrayList<>(
-        profileRepository.findAllByNameContainsOrSurnameContains(searchName, searchName));
+
+    return profileRepository.findAll(Specification
+        .where(hasNameLike(searchName)
+            .or(hasSurnameLike(searchName))));
   }
 }
