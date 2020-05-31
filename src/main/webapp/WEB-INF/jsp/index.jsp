@@ -1,13 +1,13 @@
+<%@ page import="com.films.search.advansed.diploma.LocalDateTimeUtils" %>
 <%@ page import="com.films.search.advansed.diploma.database.model.Genre" %>
-<%@ page import="com.films.search.advansed.diploma.database.model.Tag" %>
-<%@ page import="java.util.Map" %>
-<%@ page import="java.util.HashMap" %>
-<%@ page import="java.time.Month" %>
-<%@ page import="java.time.LocalDate" %>
 <%@ page import="com.films.search.advansed.diploma.database.model.Movie" %>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.ArrayList" %>
 <%@ page import="com.films.search.advansed.diploma.database.model.Profile" %>
+<%@ page import="com.films.search.advansed.diploma.database.model.Tag" %>
+<%@ page import="java.time.LocalDate" %>
+<%@ page import="java.time.Month" %>
+<%@ page import="java.util.HashMap" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.Map" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
@@ -76,7 +76,7 @@
 
             <select name="releaseYearStart">
                 <option value="-"> -</option>
-                <% int firstFilmYear = 1895;
+                <% int firstFilmYear = LocalDateTimeUtils.FIRST_FILM_DATE.getYear();
                     for (int i = LocalDate.now().getYear(); i >= firstFilmYear; i--) {%>
                 <option value="<%=i%>"><%=i%>
                 </option>

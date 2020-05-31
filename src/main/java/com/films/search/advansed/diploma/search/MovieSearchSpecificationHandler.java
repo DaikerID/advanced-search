@@ -15,9 +15,8 @@ public class MovieSearchSpecificationHandler {
     return (Specification<Movie>) (root, query, cb) -> {
       if (advancedSearchQuery.getMovieName() != null) {
         return cb.like(root.get("name"), "%" + advancedSearchQuery.getMovieName() + "%");
-      } else {
-        return cb.like(root.get("name"), "%");
       }
+      return cb.like(root.get("name"), "%");
     };
   }
 
@@ -25,9 +24,8 @@ public class MovieSearchSpecificationHandler {
     return (Specification<Movie>) (root, query, cb) -> {
       if (advancedSearchQuery.getCountries() != null) {
         return cb.like(root.get("country"), "%" + advancedSearchQuery.getCountries() + "%");
-      } else {
-        return cb.like(root.get("country"), "%");
       }
+      return cb.like(root.get("country"), "%");
     };
   }
 
@@ -37,9 +35,9 @@ public class MovieSearchSpecificationHandler {
       if (advancedSearchQuery.getReleaseDateLocalDateInterval().getStart() != null) {
         return cb.greaterThanOrEqualTo(root.get("premierDate"),
             advancedSearchQuery.getReleaseDateLocalDateInterval().getStart());
-      } else {
-        return cb.greaterThanOrEqualTo(root.get("premierDate"), LocalDate.now().minusYears(200));
       }
+      return cb.greaterThanOrEqualTo(root.get("premierDate"), LocalDate.now().minusYears(200));
+
     };
   }
 
@@ -49,9 +47,9 @@ public class MovieSearchSpecificationHandler {
       if (advancedSearchQuery.getReleaseDateLocalDateInterval().getEnd() != null) {
         return cb.lessThanOrEqualTo(root.get("premierDate"),
             advancedSearchQuery.getReleaseDateLocalDateInterval().getEnd());
-      } else {
-        return cb.lessThanOrEqualTo(root.get("premierDate"), LocalDate.now());
       }
+      return cb.lessThan(root.get("premierDate"), LocalDate.now());
+
     };
   }
 
@@ -59,9 +57,9 @@ public class MovieSearchSpecificationHandler {
     //TODO refactor this
     Set<Genre> genres = Set.of(advancedSearchQuery.getGenres());
     return (Specification<Movie>) (root, query, cb) -> {
-      if (!advancedSearchQuery.getGenres().equals(Genre.NONE)){
+      if (!advancedSearchQuery.getGenres().equals(Genre.NONE)) {
         Predicate predicate = null;
-        for (Genre genre : genres){
+        for (Genre genre : genres) {
           predicate = predicate == null ? cb.isMember(genre, root.get("genres")) :
               cb.and(predicate, cb.isMember(genre, root.get("genres")));
         }
