@@ -1,4 +1,4 @@
-package com.films.search.advansed.diploma.search;
+package com.films.search.advansed.diploma.search.handler;
 
 import com.films.search.advansed.diploma.database.model.Profile;
 import org.springframework.data.jpa.domain.Specification;

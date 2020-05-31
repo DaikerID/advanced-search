@@ -6,7 +6,7 @@ import com.films.search.advansed.diploma.database.model.Movie;
 import com.films.search.advansed.diploma.database.model.Profile;
 import com.films.search.advansed.diploma.frontend.WebMessageCode;
 import com.films.search.advansed.diploma.frontend.WebMessageSource;
-import com.films.search.advansed.diploma.service.SearchService;
+import com.films.search.advansed.diploma.search.service.SearchService;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -23,6 +23,8 @@ public class HomePageController {
   @GetMapping(value = "/")
   public ModelAndView printHello() {
     ModelAndView model = new ModelAndView("index");
+    model.addObject("movies", List.of());
+    model.addObject("profiles", List.of());
     prepareForAdvancedSearchForm(model);
     return model;
   }

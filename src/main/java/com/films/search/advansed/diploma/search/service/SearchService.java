@@ -1,4 +1,4 @@
-package com.films.search.advansed.diploma.service;
+package com.films.search.advansed.diploma.search.service;
 
 import com.films.search.advansed.diploma.controller.form.AdvancedSearchForm;
 import com.films.search.advansed.diploma.search.entities.AdvancedSearchQuery;

@@ -1,6 +1,6 @@
 package com.films.search.advansed.diploma.database.service;
 
-import static com.films.search.advansed.diploma.search.ProfileSpecificationHandler.*;
+import static com.films.search.advansed.diploma.search.handler.ProfileSpecificationHandler.*;
 
 import com.films.search.advansed.diploma.database.model.Profile;
 import com.films.search.advansed.diploma.database.repository.ProfileRepository;
@@ -25,29 +25,45 @@ public class ProfileService {
 
   public List<Profile> findAllProfilesByNameContains(String searchName) {
     if (searchName.contains(" ")) {
-      String names[] = searchName.split(" ");
+      String[] names = searchName.split(" ");
 
       if (names.length == 2) {
-        return
-            profileRepository.findAll(Specification
-                .where(hasNameLike(names[0])
-                    .and(hasSurnameLike(names[1]))));
-      } else {
-
-        Set<Profile> profileHashSet = new HashSet<>();
-        for (String currentName : names) {
-          profileHashSet.addAll(
-              profileRepository.findAll(Specification
-                  .where(hasNameLike(currentName)
-                      .or(hasSurnameLike(currentName)))));
+        Set<Profile> profileSet = findAllByNameAndSurname(names[0], names[1]);
+        if (profileSet.size() == 0) {
+          profileSet.addAll(findAllByNameOrSurname(names[0], names[1]));
         }
+        if (profileSet.size() == 0) {
+          profileSet.addAll(findByEachWord(names));
+        }
+        return new ArrayList<>(profileSet);
 
-        return new ArrayList<>(profileHashSet);
+      } else {
+        return new ArrayList<>(findByEachWord(names));
       }
     }
+    return new ArrayList<>(findAllByNameOrSurname(searchName, searchName));
+  }
 
-    return profileRepository.findAll(Specification
-        .where(hasNameLike(searchName)
-            .or(hasSurnameLike(searchName))));
+  private Set<Profile> findAllByNameAndSurname(String name, String surname) {
+    return new HashSet<>(profileRepository.findAll(Specification
+        .where(hasNameLike(name)
+            .and(hasSurnameLike(surname)))));
+  }
+
+  private Set<Profile> findAllByNameOrSurname(String name, String surname) {
+    return new HashSet<>(profileRepository.findAll(Specification
+        .where(hasNameLike(name)
+            .or(hasSurnameLike(surname)))));
+  }
+
+  private Set<Profile> findByEachWord(String[] filters) {
+    Set<Profile> profileHashSet = new HashSet<>();
+    for (String currentName : filters) {
+      profileHashSet.addAll(
+          profileRepository.findAll(Specification
+              .where(hasNameLike(currentName)
+                  .or(hasSurnameLike(currentName)))));
+    }
+    return profileHashSet;
   }
 }
