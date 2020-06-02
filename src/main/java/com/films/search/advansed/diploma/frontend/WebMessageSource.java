@@ -41,8 +41,7 @@ public class WebMessageSource {
   public Map<Month, String> getMonthsMap(Object... args) {
     Map<Month, String> monthStringHashMap = new HashMap<>();
     for (Month month : Month.values()) {
-      monthStringHashMap
-          .put(month, messageSource.getMessage(month.toString(), args, Locale.getDefault()));
+      monthStringHashMap.put(month, month.name());
     }
     return monthStringHashMap;
   }

@@ -14,7 +14,7 @@ import lombok.Data;
 @Builder
 public class AdvancedSearchQuery {
 
-  private static final String NONE = "-";
+
 
   private String movieName;
   private String actorsName;
@@ -43,7 +43,8 @@ public class AdvancedSearchQuery {
   private static Set<Tag> getTagSet(AdvancedSearchForm advancedSearchForm) {
     Set<Tag> tags = new HashSet<>();
     for (String tagString : advancedSearchForm.getTags()) {
-      if (!tagString.equals(NONE)) {
+      Tag tag = Tag.valueOf(tagString);
+      if (!tag.equals(Tag.NONE)){
         tags.add(Tag.valueOf(tagString));
       }
     }
@@ -53,7 +54,8 @@ public class AdvancedSearchQuery {
   private static Set<Genre> getGenreSet(AdvancedSearchForm advancedSearchForm) {
     Set<Genre> genres = new HashSet<>();
     for (String genreString : advancedSearchForm.getGenres()) {
-      if (!genreString.equals(NONE)) {
+      Genre genre = Genre.valueOf(genreString);
+      if (!genre.equals(Genre.NONE)) {
         genres.add(Genre.valueOf(genreString));
       }
     }
