@@ -24,6 +24,22 @@ public class ProfileSpecificationHandler {
     };
   }
 
+  public static Specification<Profile> isAnyone() {
+    return Specification.where(isActor()).or(isDirector().or(isProducer()));
+  }
+
+  public static Specification<Profile> isActor() {
+    return (Specification<Profile>) (root, query, cb) -> cb.greaterThan(cb.size(root.get("actor")), 0);
+  }
+
+  public static Specification<Profile> isProducer() {
+    return (Specification<Profile>) (root, query, cb) -> cb.greaterThan(cb.size(root.get("producer")), 0);
+  }
+
+  public static Specification<Profile> isDirector() {
+    return (Specification<Profile>) (root, query, cb) -> cb.greaterThan(cb.size(root.get("director")), 0);
+  }
+
   public static Specification<Profile> hasNameOrSurnameContains(String[] filters) {
 
     return (Specification<Profile>) (root, query, cb) -> {

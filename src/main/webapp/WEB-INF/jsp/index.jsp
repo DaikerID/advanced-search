@@ -15,7 +15,8 @@
 <%@ include file="fragments/head.jsp" %>
 <body>
 <%@ include file="fragments/header.jsp" %>
-<div>
+
+<div class="content">
     <form action="/search">
         <h2>Search</h2>
         <p><input type="search" name="searchLine" placeholder="Find movie" required>
@@ -29,29 +30,39 @@
         <p><input type="search" name="producersName" placeholder="producersName">
         <p><input type="search" name="countries" placeholder="countries">
 
+        <div class="tagSelectorContainer">
+            <label>Choose a tags:</label>
+            <div class="tagSelector">
+                <select name="tags">
+                    <%
+                        Map<Tag, String> tagsMap = (HashMap<Tag, String>) request
+                                .getAttribute("tagsMap");
+                        for (Tag tag : Tag.values()) {%>
+                    <option value="<%=tag.toString()%>"><%=tagsMap.get(tag)%>
+                    </option>
+                    <%}%>
+                </select>
+                </select><input type="button" id="addTagButton" value="Add">
+            </div>
+        </div>
 
-        <p><label>Choose a tags:</label>
-            <select name="tags">
-                <%
-                    Map<Tag, String> tagsMap = (HashMap<Tag, String>) request
-                            .getAttribute("tagsMap");
-                    for (Tag tag : Tag.values()) {%>
-                <option value="<%=tag.toString()%>"><%=tagsMap.get(tag)%>
-                </option>
-                <%}%>
-            </select>
+        <div class="genreSelectorContainer">
+            <label>Choose a genre:</label>
 
+            <div class="genreSelector">
+                <select name="genres">
+                    <%
+                        Map<Genre, String> genresMap = (HashMap<Genre, String>) request
+                                .getAttribute("genresMap");
+                        for (Genre genre : Genre.values()) {%>
+                    <option value="<%=genre.toString()%>"><%=genresMap.get(genre)%>
+                    </option>
+                    <%}%>
+                </select>
+                <input type="button" id="addGenreButton" value="Add">
+            </div>
+        </div>
 
-        <p><label>Choose a genre:</label>
-            <select name="genres">
-                <%
-                    Map<Genre, String> genresMap = (HashMap<Genre, String>) request
-                            .getAttribute("genresMap");
-                    for (Genre genre : Genre.values()) {%>
-                <option value="<%=genre.toString()%>"><%=genresMap.get(genre)%>
-                </option>
-                <%}%>
-            </select>
 
 
         <p><label>Choose a begining of release date interval:</label>
@@ -62,7 +73,6 @@
                 </option>
                 <%}%>
             </select>
-
             <select name="releaseMonthStart">
                 <option value="-"> -</option>
                 <%
@@ -73,7 +83,6 @@
                 </option>
                 <%}%>
             </select>
-
             <select name="releaseYearStart">
                 <option value="-"> -</option>
                 <% int firstFilmYear = LocalDateTimeUtils.FIRST_FILM_DATE.getYear();
@@ -109,6 +118,19 @@
         <p><input type="submit" value="Search"></p>
     </form>
 </div>
+<script>
+  $(function () {
+    $('#addTagButton').click(function () {
+      $(".tagSelector").first().clone(true).appendTo(".tagSelectorContainer");
+      return false;
+    });
+
+    $('#addGenreButton').click(function () {
+      $(".genreSelector").first().clone(true).appendTo(".genreSelectorContainer");
+      return false;
+    });
+  });
+</script>
 <div class="results">
     <div>
         <% List<Movie> movies = (List<Movie>) request.getAttribute("movies");

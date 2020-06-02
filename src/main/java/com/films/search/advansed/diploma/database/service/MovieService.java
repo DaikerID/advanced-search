@@ -29,10 +29,10 @@ public class MovieService {
   public List<Movie> findAllByQuery(AdvancedSearchQuery advancedSearchQuery) {
     return movieRepository.findAll(Specification
         .where(hasNameLike(advancedSearchQuery))
-        .and(hasCountryLike(advancedSearchQuery))
-        .and(hasPremierDateGreaterThan(advancedSearchQuery))
-        .and(hasPremierDateLessThan(advancedSearchQuery))
-        .and(hasGenres(advancedSearchQuery))
-        .and(hasTags(advancedSearchQuery)));
+        .and(hasCountryLike(advancedSearchQuery)
+        .and(hasPremierDateGreaterThan(advancedSearchQuery)
+        .and(hasPremierDateLessThan(advancedSearchQuery)
+        .and(hasGenres(advancedSearchQuery)
+        .and(hasTags(advancedSearchQuery)))))));
   }
 }

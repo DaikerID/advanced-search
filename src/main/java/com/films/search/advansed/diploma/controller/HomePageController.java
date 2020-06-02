@@ -1,5 +1,7 @@
 package com.films.search.advansed.diploma.controller;
 
+import static com.films.search.advansed.diploma.search.handler.ProfileSpecificationHandler.*;
+
 import com.films.search.advansed.diploma.controller.form.AdvancedSearchForm;
 import com.films.search.advansed.diploma.controller.form.SearchForm;
 import com.films.search.advansed.diploma.database.model.Movie;
@@ -9,6 +11,7 @@ import com.films.search.advansed.diploma.frontend.WebMessageSource;
 import com.films.search.advansed.diploma.search.service.SearchService;
 import java.util.List;
 import lombok.AllArgsConstructor;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -36,7 +39,8 @@ public class HomePageController {
     model.addObject("search", searchForm.getSearchLine());
     prepareModelForShowResults(model,
         searchService.findAllMoviesByName(searchForm.getSearchLine()),
-        searchService.findAllProfilesByName(searchForm.getSearchLine()));
+        searchService.findAllProfilesByName(searchForm.getSearchLine(),
+            Specification.where(isAnyone())));
     return model;
   }
 
@@ -44,7 +48,8 @@ public class HomePageController {
   public ModelAndView searchUser(AdvancedSearchForm searchForm) {
     ModelAndView model = new ModelAndView();
     prepareForAdvancedSearchForm(model);
-    prepareModelForShowResults(model, searchService.findAllMoviesByAdvancedForm(searchForm), List.of());
+    prepareModelForShowResults(model, searchService.findAllMoviesByAdvancedForm(searchForm),
+        List.of());
     return model;
   }
 

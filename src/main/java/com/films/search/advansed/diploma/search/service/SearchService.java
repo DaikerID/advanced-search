@@ -8,6 +8,7 @@ import com.films.search.advansed.diploma.database.service.MovieService;
 import com.films.search.advansed.diploma.database.service.ProfileService;
 import java.util.List;
 import lombok.AllArgsConstructor;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -25,8 +26,8 @@ public class SearchService {
     return movieService.findAllByNameContains(name.trim());
   }
 
-  public List<Profile> findAllProfilesByName(String name){
-    return profileService.findAllProfilesByNameContains(name.trim());
+  public List<Profile> findAllProfilesByName(String name, Specification<Profile> specification){
+    return profileService.findAllProfilesByNameContains(name.trim(), specification);
   }
 
   ;

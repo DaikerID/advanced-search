@@ -10,8 +10,8 @@ public class AdvancedSearchForm {
   private String directorsName;
   private String producersName;
   private String countries;
-  private String tags;
-  private String genres;
+  private String[] tags;
+  private String[] genres;
   private String releaseDayStart;
   private String releaseMonthStart;
   private String releaseYearStart;
