@@ -14,8 +14,6 @@ import lombok.Data;
 @Builder
 public class AdvancedSearchQuery {
 
-
-
   private String movieName;
   private String actorsName;
   private String directorsName;

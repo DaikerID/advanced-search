@@ -17,7 +17,7 @@ public class ProfileRestController {
   private final SearchService searchService;
 
   @RequestMapping(value = "/ajax-search", method = RequestMethod.POST)
-  public String updateHosting(@RequestParam SearchForm searchForm) {
+  public String search(@RequestParam SearchForm searchForm) {
 
     searchService.findAllMoviesByName(searchForm.getSearchLine());
     searchService.findAllProfilesByName(searchForm.getSearchLine(), isAnyone());

@@ -74,6 +74,8 @@ public class HomePageController {
     } else {
       model.setViewName("index");
       model.addObject("NO_RESULTS", messageSource.getMessage(WebMessageCode.NO_RESULTS));
+      model.addObject("movies", List.of());
+      model.addObject("profiles", List.of());
     }
   }
 }

@@ -6,6 +6,7 @@ import com.films.search.advansed.diploma.database.model.Movie;
 import com.films.search.advansed.diploma.database.model.Profile;
 import com.films.search.advansed.diploma.database.service.MovieService;
 import com.films.search.advansed.diploma.database.service.ProfileService;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
@@ -19,7 +20,7 @@ public class SearchService {
   ProfileService profileService;
 
   public List<Movie> findAllMoviesByAdvancedForm(AdvancedSearchForm searchForm) {
-    return movieService.findAllByQuery(AdvancedSearchQuery.build(searchForm));
+    return new ArrayList<>(movieService.findAllByQuery(AdvancedSearchQuery.build(searchForm)));
   }
 
   public List<Movie> findAllMoviesByName(String name){
