@@ -92,32 +92,53 @@ public class MovieSearchSpecificationHandler {
   public static Specification<Movie> hasActor(AdvancedSearchQuery advancedSearchQuery) {
     return (Specification<Movie>) (root, query, cb) -> {
       final Join<Movie, Profile> actorJoin = root.join("actors");
-      if (advancedSearchQuery.getActorsName().contains(" ")) {
-        String[] names = advancedSearchQuery.getActorsName().split(" ");
-        if (names.length == 2){
-          return cb.and(nameProfileLike(cb, actorJoin, names[0]),
-              surnameProfileLike(cb, actorJoin, names[1]));
-        }
-        Predicate anyLike = null;
-        for (String filter : names){
-          anyLike = anyLike == null ? nameProfileLike(cb, actorJoin, filter)
-          : cb.or(anyLike, nameProfileLike(cb, actorJoin, filter));
-
-          anyLike = cb.or(anyLike, surnameProfileLike(cb, actorJoin, filter));
-        }
-        return anyLike;
-      }
-      return cb.or(nameProfileLike(cb, actorJoin, advancedSearchQuery.getActorsName()),
-          surnameProfileLike(cb, actorJoin, advancedSearchQuery.getActorsName()));
+      return hasProfiles(cb, actorJoin, advancedSearchQuery.getActorsName());
     };
   }
 
-  private static Predicate nameProfileLike(CriteriaBuilder cb, Join profileJoin, String filter){
+  public static Specification<Movie> hasDirector(AdvancedSearchQuery advancedSearchQuery) {
+    return (Specification<Movie>) (root, query, cb) -> {
+      final Join<Movie, Profile> directorJoin = root.join("directors");
+      return hasProfiles(cb, directorJoin, advancedSearchQuery.getDirectorsName());
+    };
+  }
+
+  public static Specification<Movie> hasProducer(AdvancedSearchQuery advancedSearchQuery) {
+    return (Specification<Movie>) (root, query, cb) -> {
+      final Join<Movie, Profile> producersJoin = root.join("producers");
+      return hasProfiles(cb, producersJoin, advancedSearchQuery.getProducersName());
+    };
+  }
+
+  private static Predicate hasProfiles(CriteriaBuilder cb, Join<Movie, Profile> join,
+      String queryFilter) {
+    if (queryFilter.contains(" ")) {
+      String[] names = queryFilter.split(" ");
+      if (names.length == 2) {
+        return cb.and(nameProfileLike(cb, join, names[0]),
+            surnameProfileLike(cb, join, names[1]));
+      }
+      Predicate anyLike = null;
+      for (String filter : names) {
+        anyLike = anyLike == null ? nameProfileLike(cb, join, filter)
+            : cb.or(anyLike, nameProfileLike(cb, join, filter));
+
+        anyLike = cb.or(anyLike, surnameProfileLike(cb, join, filter));
+      }
+      return anyLike;
+    }
+    return cb.or(nameProfileLike(cb, join, queryFilter),
+        surnameProfileLike(cb, join, queryFilter));
+  }
+
+  private static Predicate nameProfileLike(CriteriaBuilder cb, Join<Movie, Profile> profileJoin,
+      String filter) {
     return cb.like(cb.upper(profileJoin.get("name")),
         "%" + filter.toUpperCase() + "%");
   }
 
-  private static Predicate surnameProfileLike(CriteriaBuilder cb, Join profileJoin, String filter){
+  private static Predicate surnameProfileLike(CriteriaBuilder cb, Join<Movie, Profile> profileJoin,
+      String filter) {
     return cb.like(cb.upper(profileJoin.get("surname")),
         "%" + filter.toUpperCase() + "%");
   }
