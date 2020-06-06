@@ -6,6 +6,7 @@ import com.films.search.advansed.diploma.controller.form.AdvancedSearchForm;
 import com.films.search.advansed.diploma.database.model.Genre;
 import com.films.search.advansed.diploma.database.model.Tag;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import lombok.Builder;
 import lombok.Data;
@@ -15,7 +16,7 @@ import lombok.Data;
 public class AdvancedSearchQuery {
 
   private String movieName;
-  private Set<String>  actors;
+  private Set<String> actors;
   private Set<String> directors;
   private Set<String> producers;
   private String countries;
@@ -41,7 +42,7 @@ public class AdvancedSearchQuery {
     Set<String> actors = new HashSet<>();
     if (names != null) {
       for (String actor : names) {
-        if (!"".equals(actor)){
+        if (!"".equals(actor)) {
           actors.add(actor.trim());
         }
       }
@@ -51,23 +52,19 @@ public class AdvancedSearchQuery {
 
   private static Set<Tag> getTagSet(AdvancedSearchForm advancedSearchForm) {
     Set<Tag> tags = new HashSet<>();
-    for (String tagString : advancedSearchForm.getTags()) {
-      Tag tag = Tag.valueOf(tagString);
-      if (!tag.equals(Tag.NONE)){
+    if (Objects.nonNull(advancedSearchForm.getTags())) {
+      for (String tagString : advancedSearchForm.getTags()) {
         tags.add(Tag.valueOf(tagString));
       }
     }
-
     return tags;
   }
 
   private static Set<Genre> getGenreSet(AdvancedSearchForm advancedSearchForm) {
     Set<Genre> genres = new HashSet<>();
-    for (String genreString : advancedSearchForm.getGenres()) {
-      Genre genre = Genre.valueOf(genreString);
-      if (!genre.equals(Genre.NONE)) {
+    if (Objects.nonNull(advancedSearchForm.getGenres())) {
+      for (String genreString : advancedSearchForm.getGenres()) {
         genres.add(Genre.valueOf(genreString));
-
       }
     }
     return genres;

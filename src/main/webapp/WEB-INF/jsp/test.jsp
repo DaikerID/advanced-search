@@ -32,7 +32,7 @@
 <div class="tagSelectorContainer">
     <label>Choose a tags:</label>
     <div class="tagSelector">
-        <select name= "name">
+        <select name= "name" multiple>
             <%
                 Map<Tag, String> tagsMap = (HashMap<Tag, String>) request
                         .getAttribute("tagsMap");

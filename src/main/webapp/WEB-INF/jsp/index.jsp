@@ -13,7 +13,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
 <html>
 <%@ include file="fragments/head.jsp" %>
-<body>
+<body class="grey darken-3">
 <%@ include file="fragments/header.jsp" %>
 
 <div class="container">
@@ -68,41 +68,38 @@
                 <div class="tagSelectorContainer">
                     <label>Choose a tags:</label>
                     <div class="tagSelector">
-                        <select name="tags">
+                        <select name="tags" multiple>
+                            <option class="white" value="-" disabled selected>By tag</option>
                             <%
                                 Map<Tag, String> tagsMap = (HashMap<Tag, String>) request
                                         .getAttribute("tagsMap");
                                 for (Tag tag : Tag.values()) {%>
-                            <option value="<%=tag.toString()%>"><%=tagsMap.get(tag)%>
+                            <option class="white" value="<%=tag.toString()%>"><%=tagsMap.get(tag)%>
                             </option>
                             <%}%>
                         </select>
                     </div>
                 </div>
-            </div>
-            <div class="col s3">
-                <a class="waves-effect waves-light btn" id="addTagButton">Add tag</a>
             </div>
 
             <div class="col s3">
                 <div class="genreSelectorContainer">
                     <label>Choose a genre:</label>
                     <div class="genreSelector">
-                        <select name="genres">
+                        <select name="genres" multiple>
+                            <option class="white" value="-" disabled selected>By genre</option>
                             <%
                                 Map<Genre, String> genresMap = (HashMap<Genre, String>) request
                                         .getAttribute("genresMap");
                                 for (Genre genre : Genre.values()) {%>
-                            <option value="<%=genre.toString()%>"><%=genresMap.get(genre)%>
+                            <option class="white" value="<%=genre.toString()%>"><%=genresMap
+                                    .get(genre)%>
                             </option>
                             <%}%>
                         </select>
 
                     </div>
                 </div>
-            </div>
-            <div class="col s3">
-                <a class="waves-effect blue-grey btn" id="addGenreButton">Add genre</a>
             </div>
         </div>
         <div class="row">
@@ -118,7 +115,7 @@
             </div>
             <div class="col s3">
                 <select name="releaseMonthStart">
-                    <option value="-" >after month</option>
+                    <option value="-">after month</option>
                     <%
                         Map<Month, String> monthsMap = (HashMap<Month, String>) request
                                 .getAttribute("monthsMap");
@@ -201,16 +198,6 @@
       $(".producerInput").first().clone(true).appendTo(".producerContainer");
       return false;
     });
-
-    $('#addTagButton').click(function () {
-      $(".tagSelector").first().clone(true).appendTo(".tagSelectorContainer");
-      return false;
-    });
-
-    $('#addGenreButton').click(function () {
-      $(".genreSelector").first().clone(true).appendTo(".genreSelectorContainer");
-      return false;
-    });
     //==========-----------------------------------------------------------------------
     // initialize
     $('.materialSelect').material_select();
@@ -231,6 +218,16 @@
       // fire custom event anytime you've updated select
       $("#myDropdown").trigger('contentChanged');
 
+    });
+
+    $(function () {
+      $('#demo5-1').colorpicker();
+      $('#demo5-2').colorpicker();
+      $('#demo5-3').colorpicker({
+        container: true,
+        color: "rgba(100, 181, 246)",
+        inline: true
+      });
     });
   })
 </script>
