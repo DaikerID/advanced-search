@@ -19,120 +19,160 @@
 <div class="container">
     <form action="/advanced-search">
         <h2>Advanced search</h2>
-        <p><input type="search" name="movieName" placeholder="by name">
-        <div class="actorsContainer">
-            <div class="actorInput">
-                <input type="search" name="actors" placeholder="By actor">
+        <p><input type="search" name="movieName" placeholder="By name">
+        <div class="row">
+            <div class="col s6">
+                <div class="actorsContainer">
+                    <div class="actorInput">
+                        <input type="search" name="actors" placeholder="By actor">
+                    </div>
+                </div>
+            </div>
+            <div class="col s6">
                 <a class="waves-effect waves-light btn" id="addActorButton">Add actor</a>
             </div>
         </div>
+        <div class="row">
+            <div class="col s6">
+                <div class="directorsContainer">
+                    <div class="directorInput">
+                        <input type="search" name="directors" placeholder="By director">
 
-        <div class="directorsContainer">
-            <div class="directorInput">
-                <input type="search" name="directors" placeholder="By director">
-                <a class="waves-effect waves-light btn" id="addDirectorButton">Add director</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col s6">
+                <a class="waves-effect waves-light btn" id="addDirectorButton">Add
+                    director</a>
             </div>
         </div>
+        <div class="row">
+            <div class="col s6">
+                <div class="producerContainer">
+                    <div class="producerInput">
+                        <input type="search" name="producers" placeholder="By producer">
 
-        <div class="producerContainer">
-            <div class="producerInput">
-                <input type="search" name="producers" placeholder="By producer">
-                <a class="waves-effect waves-light btn" id="addProducerButton">Add producer</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col s6">
+                <a class="waves-effect waves-light btn" id="addProducerButton">Add
+                    producer</a>
             </div>
         </div>
 
         <p><input type="search" name="countries" placeholder="countries">
 
-        <div class="tagSelectorContainer">
-            <label>Choose a tags:</label>
-            <div class="tagSelector">
-                <select name="tags">
-                    <%
-                        Map<Tag, String> tagsMap = (HashMap<Tag, String>) request
-                                .getAttribute("tagsMap");
-                        for (Tag tag : Tag.values()) {%>
-                    <option value="<%=tag.toString()%>"><%=tagsMap.get(tag)%>
-                    </option>
-                    <%}%>
-                </select>
+        <div class="row">
+            <div class="col s3">
+                <div class="tagSelectorContainer">
+                    <label>Choose a tags:</label>
+                    <div class="tagSelector">
+                        <select name="tags">
+                            <%
+                                Map<Tag, String> tagsMap = (HashMap<Tag, String>) request
+                                        .getAttribute("tagsMap");
+                                for (Tag tag : Tag.values()) {%>
+                            <option value="<%=tag.toString()%>"><%=tagsMap.get(tag)%>
+                            </option>
+                            <%}%>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col s3">
                 <a class="waves-effect waves-light btn" id="addTagButton">Add tag</a>
             </div>
-        </div>
 
-        <div class="genreSelectorContainer">
-            <label>Choose a genre:</label>
+            <div class="col s3">
+                <div class="genreSelectorContainer">
+                    <label>Choose a genre:</label>
+                    <div class="genreSelector">
+                        <select name="genres">
+                            <%
+                                Map<Genre, String> genresMap = (HashMap<Genre, String>) request
+                                        .getAttribute("genresMap");
+                                for (Genre genre : Genre.values()) {%>
+                            <option value="<%=genre.toString()%>"><%=genresMap.get(genre)%>
+                            </option>
+                            <%}%>
+                        </select>
 
-            <div class="genreSelector">
-                <select name="genres">
-                    <%
-                        Map<Genre, String> genresMap = (HashMap<Genre, String>) request
-                                .getAttribute("genresMap");
-                        for (Genre genre : Genre.values()) {%>
-                    <option value="<%=genre.toString()%>"><%=genresMap.get(genre)%>
-                    </option>
-                    <%}%>
-                </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col s3">
                 <a class="waves-effect blue-grey btn" id="addGenreButton">Add genre</a>
             </div>
         </div>
-
-
-        <p><label>Choose a begining of release date interval:</label>
-            <select name="releaseDayStart">
-                <option value="-"> -</option>
-                <% for (int i = 1; i <= 31; i++) {%>
-                <option value="<%=i%>"><%=i%>
-                </option>
-                <%}%>
-            </select>
-
-
-        <select name="releaseMonthStart">
-            <option value="-"> -</option>
-            <%
-                Map<Month, String> monthsMap = (HashMap<Month, String>) request
-                        .getAttribute("monthsMap");
-                for (Month month : Month.values()) {%>
-            <option value="<%=month.toString()%>"><%=monthsMap.get(month)%>
-            </option>
-            <%}%>
-        </select>
-        <select name="releaseYearStart">
-            <option value="-"> -</option>
-            <% int firstFilmYear = LocalDateTimeUtils.FIRST_FILM_DATE.getYear();
-                for (int i = LocalDate.now().getYear(); i >= firstFilmYear; i--) {%>
-            <option value="<%=i%>"><%=i%>
-            </option>
-            <%}%>
-        </select>
-
-        <p><label>Choose a ending of release date interval:</label>
-            <select name="releaseDayEnd">
-                <option value="-"> -</option>
-                <% for (int i = 1; i <= 31; i++) {%>
-                <option value="<%=i%>"><%=i%>
-                </option>
-                <%}%>
-            </select>
-            <select name="releaseMonthEnd">
-                <option value="-"> -</option>
-                <% for (Month month : Month.values()) {%>
-                <option value="<%=month.toString()%>"><%=monthsMap.get(month)%>
-                </option>
-                <%}%>
-            </select>
-            <select name="releaseYearEnd">
-                <option value="-"> -</option>
-                <% for (int i = LocalDate.now().getYear(); i >= firstFilmYear; i--) {%>
-                <option value="<%=i%>"><%=i%>
-                </option>
-                <%}%>
-            </select>
-
-            <button class="btn waves-effect waves-light" type="submit" name="action">search film by
-                criteria
-                <i class="material-icons right">search</i>
-            </button>
+        <div class="row">
+            <p><label>Choose a begining of release date interval:</label>
+            <div class="col s1">
+                <select name="releaseDayStart">
+                    <option value="-">day</option>
+                    <% for (int i = 1; i <= 31; i++) {%>
+                    <option value="<%=i%>"><%=i%>
+                    </option>
+                    <%}%>
+                </select>
+            </div>
+            <div class="col s3">
+                <select name="releaseMonthStart">
+                    <option value="-" >after month</option>
+                    <%
+                        Map<Month, String> monthsMap = (HashMap<Month, String>) request
+                                .getAttribute("monthsMap");
+                        for (Month month : Month.values()) {%>
+                    <option value="<%=month.toString()%>"><%=monthsMap.get(month)%>
+                    </option>
+                    <%}%>
+                </select>
+            </div>
+            <div class="col s2">
+                <select name="releaseYearStart">
+                    <option value="-">after year</option>
+                    <% int firstFilmYear = LocalDateTimeUtils.FIRST_FILM_DATE.getYear();
+                        for (int i = LocalDate.now().getYear(); i >= firstFilmYear; i--) {%>
+                    <option value="<%=i%>"><%=i%>
+                    </option>
+                    <%}%>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <p><label>Choose a ending of release date interval:</label>
+            <div class="col s1">
+                <select name="releaseDayEnd">
+                    <option value="-">day</option>
+                    <% for (int i = 1; i <= 31; i++) {%>
+                    <option value="<%=i%>"><%=i%>
+                    </option>
+                    <%}%>
+                </select>
+            </div>
+            <div class="col s3">
+                <select name="releaseMonthEnd">
+                    <option value="-">before month</option>
+                    <% for (Month month : Month.values()) {%>
+                    <option value="<%=month.toString()%>"><%=monthsMap.get(month)%>
+                    </option>
+                    <%}%>
+                </select>
+            </div>
+            <div class="col s2">
+                <select name="releaseYearEnd">
+                    <option value="-">before year</option>
+                    <% for (int i = LocalDate.now().getYear(); i >= firstFilmYear; i--) {%>
+                    <option value="<%=i%>"><%=i%>
+                    </option>
+                    <%}%>
+                </select>
+            </div>
+        </div>
+        <button class="btn waves-effect waves-light" type="submit" name="action">search film by
+            criteria
+            <i class="material-icons right">search</i>
+        </button>
     </form>
 </div>
 <script>
@@ -142,7 +182,7 @@
   // });
 
   $(function () {
-    $(document).ready(function() {
+    $(document).ready(function () {
       $('select').material_select();
     });
 
@@ -176,22 +216,22 @@
     $('.materialSelect').material_select();
 
     // setup listener for custom event to re-initialize on change
-    $('.materialSelect').on('contentChanged', function() {
+    $('.materialSelect').on('contentChanged', function () {
       $(this).material_select();
     });
 
     // update function for demo purposes
-    $("#myButton").click(function() {
+    $("#myButton").click(function () {
 
       // add new value
       var newValue = getNewDoggo();
-      var $newOpt = $("<option>").attr("value",newValue).text(newValue)
+      var $newOpt = $("<option>").attr("value", newValue).text(newValue)
       $("#myDropdown").append($newOpt);
 
       // fire custom event anytime you've updated select
       $("#myDropdown").trigger('contentChanged');
 
-  });
+    });
   })
 </script>
 <div class="results">

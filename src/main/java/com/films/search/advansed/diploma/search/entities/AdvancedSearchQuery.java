@@ -57,6 +57,7 @@ public class AdvancedSearchQuery {
         tags.add(Tag.valueOf(tagString));
       }
     }
+
     return tags;
   }
 
@@ -66,6 +67,7 @@ public class AdvancedSearchQuery {
       Genre genre = Genre.valueOf(genreString);
       if (!genre.equals(Genre.NONE)) {
         genres.add(Genre.valueOf(genreString));
+
       }
     }
     return genres;

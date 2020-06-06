@@ -16,8 +16,8 @@ public class LocalDateTimeUtils {
 
   private static LocalDate getStartDate(AdvancedSearchForm advancedSearchForm) {
     LocalDate start;
-    if ((advancedSearchForm.getReleaseDayStart().equals(NONE)
-        || advancedSearchForm.getReleaseMonthStart().equals(NONE))
+    if (!(advancedSearchForm.getReleaseDayStart().equals(NONE)
+        && advancedSearchForm.getReleaseMonthStart().equals(NONE))
         && !advancedSearchForm.getReleaseYearStart().equals(NONE)) {
       start = LocalDate.of(Integer.parseInt(advancedSearchForm.getReleaseYearStart()), 1, 1);
     } else {
@@ -31,8 +31,8 @@ public class LocalDateTimeUtils {
 
   private static LocalDate getEndDate(AdvancedSearchForm advancedSearchForm) {
     LocalDate end;
-    if ((advancedSearchForm.getReleaseDayEnd().equals(NONE)
-        || advancedSearchForm.getReleaseMonthEnd().equals(NONE))
+    if (!(advancedSearchForm.getReleaseDayEnd().equals(NONE)
+        && advancedSearchForm.getReleaseMonthEnd().equals(NONE))
         && !advancedSearchForm.getReleaseYearEnd().equals(NONE)) {
       end = LocalDate.of(Integer.parseInt(advancedSearchForm.getReleaseYearEnd()), 1, 1)
           .plusYears(1);
