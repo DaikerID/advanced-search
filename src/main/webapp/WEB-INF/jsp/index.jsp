@@ -18,7 +18,7 @@
 
 <div class="container">
     <form action="/advanced-search">
-        <h2 class="white-text" >Advanced movie search</h2>
+        <h2 class="white-text">Advanced movie search</h2>
         <p><input type="search" name="movieName" placeholder="By name">
         <div class="row">
             <div class="col s6">
@@ -175,62 +175,40 @@
     <div>
         <% List<Movie> movies = (List<Movie>) request.getAttribute("movies");
             if (movies.size() > 0) {%>
-        <h2>Movies</h2>
-        <table>
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>Movie Name</th>
-                <th>Year</th>
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <% for (Movie movie : movies) {%>
-            <tr>
-                <td><%=movies.indexOf(movie) + 1%>
-                </td>
-                <td><%=movie.getName()%>
-                </td>
-                <td><%=movie.getPremierDate().getYear()%>
-                </td>
-                <td>
-                    <a href="/movie/?movieId=<%=movie.getId()%>">Movie Page</a>
-                </td>
-            </tr>
-            <%}%>
-            </tbody>
-        </table>
+        <div class="green darken-4">
+            <ul class="collection green darken-4">
+                <li class="collection-header green darken-4"><h4 class="white-text">Movies</h4></li>
+                <% for (Movie movie : movies) {%>
+                <a class="collection-item avatar" href="/movie/?movieId=<%=movie.getId()%>">
+                    <i class="material-icons circle">movie</i>
+                    <span class="title"><%=movie.getName()%></span>
+                    <p><%=movie.getPremierDate().getYear()%> <br>
+                        <%=movie.getCountry()%>
+                    </p>
+                </a>
+                <%}%>
+            </ul>
+        </div>
         <%}%>
     </div>
-
     <div>
         <%
             List<Profile> profiles = (List<Profile>) request.getAttribute("profiles");
             if (profiles.size() > 0) {%>
-        <h2>Profiles</h2>
-        <table>
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>Profile</th>
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <% for (Profile profile : profiles) {%>
-            <tr>
-                <td><%=profiles.indexOf(profile) + 1%>
-                </td>
-                <td><%=profile.getName().concat(" ").concat(profile.getSurname())%>
-                </td>
-                <td>
-                    <a href="/profile/?profileId=<%=profile.getId()%>">Profile Page</a>
-                </td>
-            </tr>
-            <%}%>
-            </tbody>
-        </table>
+        <div class="green darken-4">
+            <ul class="collection green darken-4">
+                <li class="collection-header green darken-4"><h4 class="white-text">Profiles</h4></li>
+                <% for (Profile profile : profiles) {%>
+                <a class="collection-item avatar" href="/profile//?profileId=<%=profile.getId()%>">
+                    <i class="material-icons circle">person</i>
+                    <span class="title"><%=profile.getName().concat(" ")
+                            .concat(profile.getSurname())%></span>
+                    <p><%=profile.getBirthDate().getYear()%>
+                    </p>
+                </a>
+                <%}%>
+            </ul>
+        </div>
         <%
             }
 
@@ -292,9 +270,10 @@
       })
     </script>
     <style>
-        .select-dropdown{
+        .select-dropdown {
             color: #ffffff;
         }
+
         ul.dropdown-content.select-dropdown li span {
             color: #ffffff;
             background-color: #1b5e20;
