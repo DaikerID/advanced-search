@@ -29,15 +29,6 @@ public class MovieService {
   }
 
   public Set<Movie> findAllByQuery(AdvancedSearchQuery advancedSearchQuery) {
-    return new HashSet<>(movieRepository.findAll(Specification
-        .where(hasNameLike(advancedSearchQuery))
-        .and(hasCountryLike(advancedSearchQuery)
-            .and(hasPremierDateGreaterThan(advancedSearchQuery)
-                .and(hasPremierDateLessThan(advancedSearchQuery)
-                    .and(hasGenres(advancedSearchQuery)
-                        .and(hasTags(advancedSearchQuery)
-                            .and(hasActors(advancedSearchQuery)
-                                .and(hasDirectors(advancedSearchQuery)
-                                    .and(hasProducers(advancedSearchQuery)))))))))));
+    return new HashSet<>(movieRepository.findAll(buildSpecification(advancedSearchQuery)));
   }
 }

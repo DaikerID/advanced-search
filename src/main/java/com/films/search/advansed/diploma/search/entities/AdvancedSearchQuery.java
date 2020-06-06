@@ -39,9 +39,11 @@ public class AdvancedSearchQuery {
 
   private static Set<String> getNamesSet(String[] names) {
     Set<String> actors = new HashSet<>();
-    for (String actor : names) {
-      if (!"-".equals(actor)){
-        actors.add(actor.trim());
+    if (names != null) {
+      for (String actor : names) {
+        if (!"".equals(actor)){
+          actors.add(actor.trim());
+        }
       }
     }
     return actors;

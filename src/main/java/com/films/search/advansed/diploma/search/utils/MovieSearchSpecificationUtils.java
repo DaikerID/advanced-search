@@ -16,6 +16,20 @@ import org.springframework.data.jpa.domain.Specification;
 
 public class MovieSearchSpecificationUtils {
 
+  public static Specification<Movie> buildSpecification(AdvancedSearchQuery advancedSearchQuery) {
+    return Specification.where(hasNameLike(advancedSearchQuery)
+        .and(hasCountryLike(advancedSearchQuery)
+            .and(hasPremierDateGreaterThan(advancedSearchQuery)
+                .and(hasPremierDateLessThan(advancedSearchQuery)
+                    .and(hasGenres(advancedSearchQuery)
+                        .and(hasTags(advancedSearchQuery)
+                            .and(hasActors(advancedSearchQuery)
+                                .and(hasDirectors(advancedSearchQuery)
+                                    .and(hasProducers(advancedSearchQuery)
+                                    ))
+                    )))))));
+  }
+
   public static Specification<Movie> hasNameLike(String filter) {
     return (Specification<Movie>) (root, query, cb) -> {
       if (filter != null) {
@@ -25,7 +39,7 @@ public class MovieSearchSpecificationUtils {
     };
   }
 
-  public static Specification<Movie> hasNameLike(AdvancedSearchQuery advancedSearchQuery) {
+  private static Specification<Movie> hasNameLike(AdvancedSearchQuery advancedSearchQuery) {
     return (Specification<Movie>) (root, query, cb) -> {
       if (advancedSearchQuery.getMovieName() != null) {
         return cb.like(cb.upper(root.get("name")),
@@ -35,7 +49,7 @@ public class MovieSearchSpecificationUtils {
     };
   }
 
-  public static Specification<Movie> hasCountryLike(AdvancedSearchQuery advancedSearchQuery) {
+  private static Specification<Movie> hasCountryLike(AdvancedSearchQuery advancedSearchQuery) {
     return (Specification<Movie>) (root, query, cb) -> {
       if (advancedSearchQuery.getCountries() != null) {
         return cb.like(cb.upper(root.get("country")),
@@ -45,7 +59,7 @@ public class MovieSearchSpecificationUtils {
     };
   }
 
-  public static Specification<Movie> hasPremierDateGreaterThan(
+  private static Specification<Movie> hasPremierDateGreaterThan(
       AdvancedSearchQuery advancedSearchQuery) {
     return (Specification<Movie>) (root, query, cb) -> {
       if (advancedSearchQuery.getReleaseDateLocalDateInterval().getStart() != null) {
@@ -57,7 +71,7 @@ public class MovieSearchSpecificationUtils {
     };
   }
 
-  public static Specification<Movie> hasPremierDateLessThan(
+  private static Specification<Movie> hasPremierDateLessThan(
       AdvancedSearchQuery advancedSearchQuery) {
     return (Specification<Movie>) (root, query, cb) -> {
       if (advancedSearchQuery.getReleaseDateLocalDateInterval().getEnd() != null) {
@@ -69,7 +83,7 @@ public class MovieSearchSpecificationUtils {
     };
   }
 
-  public static Specification<Movie> hasGenres(AdvancedSearchQuery advancedSearchQuery) {
+  private static Specification<Movie> hasGenres(AdvancedSearchQuery advancedSearchQuery) {
     return (Specification<Movie>) (root, query, cb) -> {
       Predicate predicate = null;
       for (Genre genre : advancedSearchQuery.getGenres()) {
@@ -81,7 +95,7 @@ public class MovieSearchSpecificationUtils {
     };
   }
 
-  public static Specification<Movie> hasTags(AdvancedSearchQuery advancedSearchQuery) {
+  private static Specification<Movie> hasTags(AdvancedSearchQuery advancedSearchQuery) {
     return (Specification<Movie>) (root, query, cb) -> {
       Predicate predicate = null;
       for (Tag tag : advancedSearchQuery.getTags()) {
@@ -92,18 +106,18 @@ public class MovieSearchSpecificationUtils {
     };
   }
 
-  public static Specification<Movie> hasActors(AdvancedSearchQuery advancedSearchQuery) {
+  private static Specification<Movie> hasActors(AdvancedSearchQuery advancedSearchQuery) {
     return (Specification<Movie>) (root, query, cb) ->
         hasProfiles(root, cb, "actors", advancedSearchQuery.getActors());
   }
 
-  public static Specification<Movie> hasDirectors(AdvancedSearchQuery advancedSearchQuery) {
+  private static Specification<Movie> hasDirectors(AdvancedSearchQuery advancedSearchQuery) {
     return (Specification<Movie>) (root, query, cb) ->
         hasProfiles(root, cb, "directors", advancedSearchQuery.getDirectors());
 
   }
 
-  public static Specification<Movie> hasProducers(AdvancedSearchQuery advancedSearchQuery) {
+  private static Specification<Movie> hasProducers(AdvancedSearchQuery advancedSearchQuery) {
     return (Specification<Movie>) (root, query, cb) ->
         hasProfiles(root, cb, "producers", advancedSearchQuery.getProducers());
   }

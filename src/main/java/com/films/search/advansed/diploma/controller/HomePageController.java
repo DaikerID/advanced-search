@@ -32,6 +32,13 @@ public class HomePageController {
     return model;
   }
 
+  @GetMapping(value = "/test")
+  public ModelAndView print() {
+    ModelAndView model = new ModelAndView("test");
+    prepareForAdvancedSearchForm(model);
+    return model;
+  }
+
   @GetMapping("/search")
   public ModelAndView searchUser(SearchForm searchForm) {
     ModelAndView model = new ModelAndView();

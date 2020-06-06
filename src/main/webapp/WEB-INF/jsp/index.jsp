@@ -16,33 +16,28 @@
 <body>
 <%@ include file="fragments/header.jsp" %>
 
-<div class="content">
-    <form action="/search">
-        <h2>Search</h2>
-        <p><input type="search" name="searchLine" placeholder="Find movie" required>
-            <input type="submit" value="Search"></p>
-    </form>
+<div class="container">
     <form action="/advanced-search">
         <h2>Advanced search</h2>
         <p><input type="search" name="movieName" placeholder="by name">
         <div class="actorsContainer">
             <div class="actorInput">
-                <input type="search" name="actorName" placeholder="By actor">
-                <input type="button" id="addActorButton" value="Add actor">
-
+                <input type="search" name="actors" placeholder="By actor">
+                <a class="waves-effect waves-light btn" id="addActorButton">Add actor</a>
             </div>
         </div>
 
         <div class="directorsContainer">
             <div class="directorInput">
-                <input type="search" name="directorName" placeholder="By director">
-                <input type="button" id="addDirectorButton" value="Add director">
+                <input type="search" name="directors" placeholder="By director">
+                <a class="waves-effect waves-light btn" id="addDirectorButton">Add director</a>
             </div>
         </div>
 
         <div class="producerContainer">
             <div class="producerInput">
-                <input type="search" name="producerName" placeholder="By producer"><input type="button" id="addProducerButton" value="Add producer">
+                <input type="search" name="producers" placeholder="By producer">
+                <a class="waves-effect waves-light btn" id="addProducerButton">Add producer</a>
             </div>
         </div>
 
@@ -60,7 +55,7 @@
                     </option>
                     <%}%>
                 </select>
-                </select><input type="button" id="addTagButton" value="Add">
+                <a class="waves-effect waves-light btn" id="addTagButton">Add tag</a>
             </div>
         </div>
 
@@ -77,7 +72,7 @@
                     </option>
                     <%}%>
                 </select>
-                <input type="button" id="addGenreButton" value="Add">
+                <a class="waves-effect blue-grey btn" id="addGenreButton">Add genre</a>
             </div>
         </div>
 
@@ -90,24 +85,26 @@
                 </option>
                 <%}%>
             </select>
-            <select name="releaseMonthStart">
-                <option value="-"> -</option>
-                <%
-                    Map<Month, String> monthsMap = (HashMap<Month, String>) request
-                            .getAttribute("monthsMap");
-                    for (Month month : Month.values()) {%>
-                <option value="<%=month.toString()%>"><%=monthsMap.get(month)%>
-                </option>
-                <%}%>
-            </select>
-            <select name="releaseYearStart">
-                <option value="-"> -</option>
-                <% int firstFilmYear = LocalDateTimeUtils.FIRST_FILM_DATE.getYear();
-                    for (int i = LocalDate.now().getYear(); i >= firstFilmYear; i--) {%>
-                <option value="<%=i%>"><%=i%>
-                </option>
-                <%}%>
-            </select>
+
+
+        <select name="releaseMonthStart">
+            <option value="-"> -</option>
+            <%
+                Map<Month, String> monthsMap = (HashMap<Month, String>) request
+                        .getAttribute("monthsMap");
+                for (Month month : Month.values()) {%>
+            <option value="<%=month.toString()%>"><%=monthsMap.get(month)%>
+            </option>
+            <%}%>
+        </select>
+        <select name="releaseYearStart">
+            <option value="-"> -</option>
+            <% int firstFilmYear = LocalDateTimeUtils.FIRST_FILM_DATE.getYear();
+                for (int i = LocalDate.now().getYear(); i >= firstFilmYear; i--) {%>
+            <option value="<%=i%>"><%=i%>
+            </option>
+            <%}%>
+        </select>
 
         <p><label>Choose a ending of release date interval:</label>
             <select name="releaseDayEnd">
@@ -132,14 +129,26 @@
                 <%}%>
             </select>
 
-        <p><input type="submit" value="Search"></p>
+            <button class="btn waves-effect waves-light" type="submit" name="action">search film by
+                criteria
+                <i class="material-icons right">search</i>
+            </button>
     </form>
 </div>
 <script>
-  $(function () {
+  // document.addEventListener('DOMContentLoaded', function() {
+  //   var elems = document.querySelectorAll('select');
+  //   var instances = M.FormSelect.init(elems, options);
+  // });
 
+  $(function () {
+    $(document).ready(function() {
+      $('select').material_select();
+    });
+
+    //============-------------ADDING_FIELDS-----------------------------------------
     $('#addActorButton').click(function () {
-      $(".actorInput").first().clone(false).appendTo(".actorsContainer");
+      $(".actorInput").first().clone(true).appendTo(".actorsContainer");
       return false;
     });
 
@@ -162,7 +171,28 @@
       $(".genreSelector").first().clone(true).appendTo(".genreSelectorContainer");
       return false;
     });
+    //==========-----------------------------------------------------------------------
+    // initialize
+    $('.materialSelect').material_select();
+
+    // setup listener for custom event to re-initialize on change
+    $('.materialSelect').on('contentChanged', function() {
+      $(this).material_select();
+    });
+
+    // update function for demo purposes
+    $("#myButton").click(function() {
+
+      // add new value
+      var newValue = getNewDoggo();
+      var $newOpt = $("<option>").attr("value",newValue).text(newValue)
+      $("#myDropdown").append($newOpt);
+
+      // fire custom event anytime you've updated select
+      $("#myDropdown").trigger('contentChanged');
+
   });
+  })
 </script>
 <div class="results">
     <div>
@@ -224,6 +254,11 @@
             <%}%>
             </tbody>
         </table>
+        <%
+            }
+
+            if (profiles.size() == 0 && movies.size() == 0) {%>
+        <h1>${NO_RESULTS}</h1>
         <%
             }
         %>
