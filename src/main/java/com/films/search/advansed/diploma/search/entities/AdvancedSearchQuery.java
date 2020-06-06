@@ -15,7 +15,7 @@ import lombok.Data;
 public class AdvancedSearchQuery {
 
   private String movieName;
-  private String actorsName;
+  private Set<String>  actors;
   private String directorsName;
   private String producersName;
   private String countries;
@@ -29,13 +29,23 @@ public class AdvancedSearchQuery {
     return AdvancedSearchQuery.builder()
         .movieName(advancedSearchForm.getMovieName().trim())
         .countries(advancedSearchForm.getCountries().trim())
-        .actorsName(advancedSearchForm.getActorsName().trim())
-        .directorsName(advancedSearchForm.getDirectorsName().trim())
-        .producersName(advancedSearchForm.getProducersName().trim())
+        .actors(getNamesSet(advancedSearchForm.getActorName()))
+        .directorsName(advancedSearchForm.getDirectorName().trim())
+        .producersName(advancedSearchForm.getProducerName().trim())
         .genres(getGenreSet(advancedSearchForm))
         .tags(getTagSet(advancedSearchForm))
         .releaseDateLocalDateInterval(parseInterval(advancedSearchForm))
         .build();
+  }
+
+  private static Set<String> getNamesSet(String[] names) {
+    Set<String> actors = new HashSet<>();
+    for (String actor : names) {
+      if (!"-".equals(actor)){
+        actors.add(actor.trim());
+      }
+    }
+    return actors;
   }
 
   private static Set<Tag> getTagSet(AdvancedSearchForm advancedSearchForm) {

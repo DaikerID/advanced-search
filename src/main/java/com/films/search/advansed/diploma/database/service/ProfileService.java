@@ -1,6 +1,6 @@
 package com.films.search.advansed.diploma.database.service;
 
-import static com.films.search.advansed.diploma.search.handler.ProfileSpecificationHandler.*;
+import static com.films.search.advansed.diploma.search.utils.ProfileSearchSpecificationUtils.*;
 
 import com.films.search.advansed.diploma.database.model.Profile;
 import com.films.search.advansed.diploma.database.repository.ProfileRepository;

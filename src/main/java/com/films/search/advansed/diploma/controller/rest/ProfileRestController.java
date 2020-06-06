@@ -1,6 +1,6 @@
 package com.films.search.advansed.diploma.controller.rest;
 
-import static com.films.search.advansed.diploma.search.handler.ProfileSpecificationHandler.*;
+import static com.films.search.advansed.diploma.search.utils.ProfileSearchSpecificationUtils.*;
 
 import com.films.search.advansed.diploma.controller.form.SearchForm;
 import com.films.search.advansed.diploma.search.service.SearchService;

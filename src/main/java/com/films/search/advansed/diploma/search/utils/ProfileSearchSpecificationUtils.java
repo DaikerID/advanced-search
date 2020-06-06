@@ -1,10 +1,10 @@
-package com.films.search.advansed.diploma.search.handler;
+package com.films.search.advansed.diploma.search.utils;
 
 import com.films.search.advansed.diploma.database.model.Profile;
 import javax.persistence.criteria.Predicate;
 import org.springframework.data.jpa.domain.Specification;
 
-public class ProfileSpecificationHandler {
+public class ProfileSearchSpecificationUtils {
 
   public static Specification<Profile> hasNameLike(String filter) {
     return (Specification<Profile>) (root, query, cb) -> {

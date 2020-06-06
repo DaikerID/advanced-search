@@ -25,9 +25,15 @@
     <form action="/advanced-search">
         <h2>Advanced search</h2>
         <p><input type="search" name="movieName" placeholder="movieName">
-        <p><input type="search" name="actorsName" placeholder="actorsName">
-        <p><input type="search" name="directorsName" placeholder="directorsName">
-        <p><input type="search" name="producersName" placeholder="producersName">
+        <div class="actorsContainer">
+            <div class="actorInput">
+                <input type="search" name="actorName" placeholder="actor name">
+                <input type="button" id="addActorButton" value="Add">
+            </div>
+        </div>
+
+        <p><input type="search" name="directorName" placeholder="directorsName">
+        <p><input type="search" name="producerName" placeholder="producersName">
         <p><input type="search" name="countries" placeholder="countries">
 
         <div class="tagSelectorContainer">
@@ -62,7 +68,6 @@
                 <input type="button" id="addGenreButton" value="Add">
             </div>
         </div>
-
 
 
         <p><label>Choose a begining of release date interval:</label>
@@ -120,6 +125,12 @@
 </div>
 <script>
   $(function () {
+
+    $('#addActorButton').click(function () {
+      $(".actorInput").first().clone(true).appendTo(".actorsContainer");
+      return false;
+    });
+
     $('#addTagButton').click(function () {
       $(".tagSelector").first().clone(true).appendTo(".tagSelectorContainer");
       return false;

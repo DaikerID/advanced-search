@@ -1,6 +1,6 @@
 package com.films.search.advansed.diploma.database.service;
 
-import static com.films.search.advansed.diploma.search.handler.MovieSearchSpecificationHandler.*;
+import static com.films.search.advansed.diploma.search.utils.MovieSearchSpecificationUtils.*;
 
 import com.films.search.advansed.diploma.search.entities.AdvancedSearchQuery;
 import com.films.search.advansed.diploma.database.model.Movie;
