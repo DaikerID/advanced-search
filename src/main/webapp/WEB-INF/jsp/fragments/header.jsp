@@ -1,10 +1,6 @@
 <%@ page import="java.time.LocalDateTime" %>
 <%@ page import="java.time.format.DateTimeFormatter" %>
-<%--<h1>what to see</h1>--%>
-<%--<h3>Load time - <%=LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yy HH:mm"))%>--%>
-<%--</h3>--%>
-
-<nav class="grey">
+<nav class="green darken-4">
     <div class="nav-wrapper">
         <a href="/" class="brand-logo">what to see</a>
         <ul class="right hide-on-med-and-down">

@@ -18,7 +18,7 @@
 
 <div class="container">
     <form action="/advanced-search">
-        <h2>Advanced search</h2>
+        <h2 class="white-text" >Advanced movie search</h2>
         <p><input type="search" name="movieName" placeholder="By name">
         <div class="row">
             <div class="col s6">
@@ -29,7 +29,7 @@
                 </div>
             </div>
             <div class="col s6">
-                <a class="waves-effect waves-light btn" id="addActorButton">Add actor</a>
+                <a class="waves-effect green darken-4 btn" id="addActorButton">Add actor</a>
             </div>
         </div>
         <div class="row">
@@ -42,7 +42,7 @@
                 </div>
             </div>
             <div class="col s6">
-                <a class="waves-effect waves-light btn" id="addDirectorButton">Add
+                <a class="waves-effect green darken-4 btn" id="addDirectorButton">Add
                     director</a>
             </div>
         </div>
@@ -56,7 +56,7 @@
                 </div>
             </div>
             <div class="col s6">
-                <a class="waves-effect waves-light btn" id="addProducerButton">Add
+                <a class="waves-effect green darken-4 btn" id="addProducerButton">Add
                     producer</a>
             </div>
         </div>
@@ -166,72 +166,12 @@
                 </select>
             </div>
         </div>
-        <button class="btn waves-effect waves-light" type="submit" name="action">search film by
+        <button class="btn waves-effect green darken-4" type="submit" name="action">search movie by
             criteria
             <i class="material-icons right">search</i>
         </button>
     </form>
-</div>
-<script>
-  // document.addEventListener('DOMContentLoaded', function() {
-  //   var elems = document.querySelectorAll('select');
-  //   var instances = M.FormSelect.init(elems, options);
-  // });
 
-  $(function () {
-    $(document).ready(function () {
-      $('select').material_select();
-    });
-
-    //============-------------ADDING_FIELDS-----------------------------------------
-    $('#addActorButton').click(function () {
-      $(".actorInput").first().clone(true).appendTo(".actorsContainer");
-      return false;
-    });
-
-    $('#addDirectorButton').click(function () {
-      $(".directorInput").first().clone(true).appendTo(".directorsContainer");
-      return false;
-    });
-
-    $('#addProducerButton').click(function () {
-      $(".producerInput").first().clone(true).appendTo(".producerContainer");
-      return false;
-    });
-    //==========-----------------------------------------------------------------------
-    // initialize
-    $('.materialSelect').material_select();
-
-    // setup listener for custom event to re-initialize on change
-    $('.materialSelect').on('contentChanged', function () {
-      $(this).material_select();
-    });
-
-    // update function for demo purposes
-    $("#myButton").click(function () {
-
-      // add new value
-      var newValue = getNewDoggo();
-      var $newOpt = $("<option>").attr("value", newValue).text(newValue)
-      $("#myDropdown").append($newOpt);
-
-      // fire custom event anytime you've updated select
-      $("#myDropdown").trigger('contentChanged');
-
-    });
-
-    $(function () {
-      $('#demo5-1').colorpicker();
-      $('#demo5-2').colorpicker();
-      $('#demo5-3').colorpicker({
-        container: true,
-        color: "rgba(100, 181, 246)",
-        inline: true
-      });
-    });
-  })
-</script>
-<div class="results">
     <div>
         <% List<Movie> movies = (List<Movie>) request.getAttribute("movies");
             if (movies.size() > 0) {%>
@@ -300,6 +240,66 @@
             }
         %>
     </div>
+    <script>
+      // document.addEventListener('DOMContentLoaded', function() {
+      //   var elems = document.querySelectorAll('select');
+      //   var instances = M.FormSelect.init(elems, options);
+      // });
+
+      $(function () {
+        $(document).ready(function () {
+          $('select').material_select();
+        });
+
+        //============-------------ADDING_FIELDS-----------------------------------------
+        $('#addActorButton').click(function () {
+          $(".actorInput").first().clone(true).appendTo(".actorsContainer");
+          return false;
+        });
+
+        $('#addDirectorButton').click(function () {
+          $(".directorInput").first().clone(true).appendTo(".directorsContainer");
+          return false;
+        });
+
+        $('#addProducerButton').click(function () {
+          $(".producerInput").first().clone(true).appendTo(".producerContainer");
+          return false;
+        });
+        //==========-----------------------------------------------------------------------
+        // initialize
+        $('.materialSelect').material_select();
+
+        // setup listener for custom event to re-initialize on change
+        $('.materialSelect').on('contentChanged', function () {
+          $(this).material_select();
+        });
+
+        // update function for demo purposes
+        $("#myButton").click(function () {
+
+          // add new value
+          var newValue = getNewDoggo();
+          var $newOpt = $("<option>").attr("value", newValue).text(newValue)
+          $("#myDropdown").append($newOpt);
+
+          // fire custom event anytime you've updated select
+          $("#myDropdown").trigger('contentChanged');
+
+        });
+
+        $(".dropdown-content>li>a").css("27, 94, 32", themeColor);
+      })
+    </script>
+    <style>
+        .select-dropdown{
+            color: #ffffff;
+        }
+        ul.dropdown-content.select-dropdown li span {
+            color: #ffffff;
+            background-color: #1b5e20;
+        }
+    </style>
 </div>
 </body>
 </html>
