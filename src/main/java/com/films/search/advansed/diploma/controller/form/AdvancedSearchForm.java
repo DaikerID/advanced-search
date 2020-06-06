@@ -6,9 +6,9 @@ import lombok.Data;
 public class AdvancedSearchForm {
 
   private String movieName;
-  private String[] actorName;
-  private String directorName;
-  private String producerName;
+  private String[] actors;
+  private String[] directors;
+  private String[] producers;
   private String countries;
   private String[] tags;
   private String[] genres;

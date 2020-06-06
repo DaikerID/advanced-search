@@ -24,16 +24,28 @@
     </form>
     <form action="/advanced-search">
         <h2>Advanced search</h2>
-        <p><input type="search" name="movieName" placeholder="movieName">
+        <p><input type="search" name="movieName" placeholder="by name">
         <div class="actorsContainer">
             <div class="actorInput">
-                <input type="search" name="actorName" placeholder="actor name">
-                <input type="button" id="addActorButton" value="Add">
+                <input type="search" name="actorName" placeholder="By actor">
+                <input type="button" id="addActorButton" value="Add actor">
+
             </div>
         </div>
 
-        <p><input type="search" name="directorName" placeholder="directorsName">
-        <p><input type="search" name="producerName" placeholder="producersName">
+        <div class="directorsContainer">
+            <div class="directorInput">
+                <input type="search" name="directorName" placeholder="By director">
+                <input type="button" id="addDirectorButton" value="Add director">
+            </div>
+        </div>
+
+        <div class="producerContainer">
+            <div class="producerInput">
+                <input type="search" name="producerName" placeholder="By producer"><input type="button" id="addProducerButton" value="Add producer">
+            </div>
+        </div>
+
         <p><input type="search" name="countries" placeholder="countries">
 
         <div class="tagSelectorContainer">
@@ -127,7 +139,17 @@
   $(function () {
 
     $('#addActorButton').click(function () {
-      $(".actorInput").first().clone(true).appendTo(".actorsContainer");
+      $(".actorInput").first().clone(false).appendTo(".actorsContainer");
+      return false;
+    });
+
+    $('#addDirectorButton').click(function () {
+      $(".directorInput").first().clone(true).appendTo(".directorsContainer");
+      return false;
+    });
+
+    $('#addProducerButton').click(function () {
+      $(".producerInput").first().clone(true).appendTo(".producerContainer");
       return false;
     });
 

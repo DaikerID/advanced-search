@@ -92,41 +92,37 @@ public class MovieSearchSpecificationUtils {
     };
   }
 
-  public static Specification<Movie> hasActor(AdvancedSearchQuery advancedSearchQuery) {
-    return (Specification<Movie>) (root, query, cb) -> {
-      final Join<Movie, Profile> actorJoin = root.join("actors");
-      return hasProfiles(root, cb, actorJoin, advancedSearchQuery.getActors());
-    };
+  public static Specification<Movie> hasActors(AdvancedSearchQuery advancedSearchQuery) {
+    return (Specification<Movie>) (root, query, cb) ->
+        hasProfiles(root, cb, "actors", advancedSearchQuery.getActors());
   }
 
-  public static Specification<Movie> hasDirector(AdvancedSearchQuery advancedSearchQuery) {
-    return (Specification<Movie>) (root, query, cb) -> {
-      final Join<Movie, Profile> directorJoin = root.join("directors");
-      return hasProfile(cb, directorJoin, advancedSearchQuery.getDirectorsName());
-    };
+  public static Specification<Movie> hasDirectors(AdvancedSearchQuery advancedSearchQuery) {
+    return (Specification<Movie>) (root, query, cb) ->
+        hasProfiles(root, cb, "directors", advancedSearchQuery.getDirectors());
+
   }
 
-  public static Specification<Movie> hasProducer(AdvancedSearchQuery advancedSearchQuery) {
-    return (Specification<Movie>) (root, query, cb) -> {
-      final Join<Movie, Profile> producersJoin = root.join("producers");
-      return hasProfile(cb, producersJoin, advancedSearchQuery.getProducersName());
-    };
+  public static Specification<Movie> hasProducers(AdvancedSearchQuery advancedSearchQuery) {
+    return (Specification<Movie>) (root, query, cb) ->
+        hasProfiles(root, cb, "producers", advancedSearchQuery.getProducers());
   }
 
   private static Predicate hasProfiles(Root<Movie> root, CriteriaBuilder cb,
-      Join<Movie, Profile> profileJoin, Set<String> filters) {
+      String joinName, Set<String> filters) {
     Predicate predicateForProfiles = null;
     for (String filter : filters) {
       predicateForProfiles = Objects.isNull(predicateForProfiles)
-          ? hasProfile(cb, profileJoin, filter)
-          : cb.and(predicateForProfiles, hasProfile(cb, profileJoin, filter));
+          ? hasProfile(root, cb, joinName, filter)
+          : cb.and(predicateForProfiles, hasProfile(root, cb, joinName, filter));
     }
     return Objects.isNull(predicateForProfiles) ? cb.like(root.get("name"), "%")
         : predicateForProfiles;
   }
 
-  private static Predicate hasProfile(CriteriaBuilder cb, Join<Movie, Profile> profileJoin,
+  private static Predicate hasProfile(Root<Movie> root, CriteriaBuilder cb, String joinName,
       String queryFilter) {
+    final Join<Movie, Profile> profileJoin = root.join(joinName);
     if (queryFilter.contains(" ")) {
       String[] names = queryFilter.split(" ");
       if (names.length == 2) {

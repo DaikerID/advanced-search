@@ -16,8 +16,8 @@ public class AdvancedSearchQuery {
 
   private String movieName;
   private Set<String>  actors;
-  private String directorsName;
-  private String producersName;
+  private Set<String> directors;
+  private Set<String> producers;
   private String countries;
   private Set<Tag> tags;
   private Set<Genre> genres;
@@ -25,13 +25,12 @@ public class AdvancedSearchQuery {
   private DurationInterval movieLengthDurationInterval;
 
   public static AdvancedSearchQuery build(AdvancedSearchForm advancedSearchForm) {
-    //TODO transform with arrays for actors, producers, directors
     return AdvancedSearchQuery.builder()
         .movieName(advancedSearchForm.getMovieName().trim())
         .countries(advancedSearchForm.getCountries().trim())
-        .actors(getNamesSet(advancedSearchForm.getActorName()))
-        .directorsName(advancedSearchForm.getDirectorName().trim())
-        .producersName(advancedSearchForm.getProducerName().trim())
+        .actors(getNamesSet(advancedSearchForm.getActors()))
+        .directors(getNamesSet(advancedSearchForm.getDirectors()))
+        .producers(getNamesSet(advancedSearchForm.getProducers()))
         .genres(getGenreSet(advancedSearchForm))
         .tags(getTagSet(advancedSearchForm))
         .releaseDateLocalDateInterval(parseInterval(advancedSearchForm))

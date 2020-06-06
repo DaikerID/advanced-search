@@ -36,8 +36,8 @@ public class MovieService {
                 .and(hasPremierDateLessThan(advancedSearchQuery)
                     .and(hasGenres(advancedSearchQuery)
                         .and(hasTags(advancedSearchQuery)
-                            .and(hasActor(advancedSearchQuery)
-                                .and(hasDirector(advancedSearchQuery)
-                                  .and(hasProducer(advancedSearchQuery)))))))))));
+                            .and(hasActors(advancedSearchQuery)
+                                .and(hasDirectors(advancedSearchQuery)
+                                    .and(hasProducers(advancedSearchQuery)))))))))));
   }
 }
