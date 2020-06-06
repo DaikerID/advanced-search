@@ -33,84 +33,54 @@
         </tbody>
     </table>
     <%if (profile.getActor().size() > 0) { %>
-    <div>
-        <h2>
-            <br>Actor
-        </h2>
+    <div class="green darken-4">
+        <ul class="collection green darken-4">
+            <li class="collection-header green darken-4"><h4 class="white-text">As actor</h4></li>
+            <% for (Movie movie : profile.getActor()) {%>
+            <a class="collection-item avatar" href="/movie/?movieId=<%=movie.getId()%>">
+                <i class="material-icons circle">movie</i>
+                <span class="title"><%=movie.getName()%></span>
+                <p><%=movie.getPremierDate().getYear()%> <br>
+                    <%=movie.getCountry()%>
+                </p>
+            </a>
+            <%}%>
+        </ul>
     </div>
-    <table>
-        <thead>
-        <tr>
-            <th>Movie name</th>
-            <th>Premier date</th>
-        </tr>
-        </thead>
-        <tbody>
-        <% for (Movie movie : profile.getActor()) {%>
-        <tr>
-            <td><%=movie.getName()%>
-            </td>
-            <td><%=movie.getPremierDate()
-                    .format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG))%>
-            </td>
-        </tr>
-        <%}%>
-        </tbody>
-    </table>
     <%}%>
 
     <%if (profile.getDirector().size() > 0) { %>
-    <div>
-        <h2>
-            <br>Director
-        </h2>
+    <div class="green darken-4">
+        <ul class="collection green darken-4">
+            <li class="collection-header green darken-4"><h4 class="white-text">As director</h4></li>
+            <% for (Movie movie : profile.getDirector()) {%>
+            <a class="collection-item avatar" href="/movie/?movieId=<%=movie.getId()%>">
+                <i class="material-icons circle">movie</i>
+                <span class="title"><%=movie.getName()%></span>
+                <p><%=movie.getPremierDate().getYear()%> <br>
+                    <%=movie.getCountry()%>
+                </p>
+            </a>
+            <%}%>
+        </ul>
     </div>
-    <table>
-        <thead>
-        <tr>
-            <th>Movie name</th>
-            <th>Premier date</th>
-        </tr>
-        </thead>
-        <tbody>
-        <% for (Movie movie : profile.getDirector()) {%>
-        <tr>
-            <td><%=movie.getName()%>
-            </td>
-            <td><%=movie.getPremierDate()
-                    .format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG))%>
-            </td>
-        </tr>
-        <%}%>
-        </tbody>
-    </table>
     <%}%>
 
     <%if (profile.getProducer().size() > 0) { %>
-    <div>
-        <h2>
-            <br>Producer
-        </h2>
+    <div class="green darken-4">
+        <ul class="collection green darken-4">
+            <li class="collection-header green darken-4"><h4 class="white-text">As producer</h4></li>
+            <% for (Movie movie : profile.getProducer()) {%>
+            <a class="collection-item avatar" href="/movie/?movieId=<%=movie.getId()%>">
+                <i class="material-icons circle">movie</i>
+                <span class="title"><%=movie.getName()%></span>
+                <p><%=movie.getPremierDate().getYear()%> <br>
+                    <%=movie.getCountry()%>
+                </p>
+            </a>
+            <%}%>
+        </ul>
     </div>
-    <table>
-        <thead>
-        <tr>
-            <th>Movie name</th>
-            <th>Premier date</th>
-        </tr>
-        </thead>
-        <tbody>
-        <% for (Movie movie : profile.getProducer()) {%>
-        <tr>
-            <td><%=movie.getName()%>
-            </td>
-            <td><%=movie.getPremierDate()
-                    .format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG))%>
-            </td>
-        </tr>
-        <%}%>
-        </tbody>
-    </table>
     <%}%>
 
     <%!

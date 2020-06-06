@@ -50,72 +50,54 @@
         </tbody>
     </table>
     <%if (movie.getDirectors().size() > 0) { %>
-    <div>
-        <h2>
-            <br>Directors
-        </h2>
+    <div class="green darken-4">
+        <ul class="collection green darken-4">
+            <li class="collection-header green darken-4"><h4 class="white-text">Directors</h4></li>
+            <% for (Profile profile : movie.getDirectors()) {%>
+            <a class="collection-item avatar" href="/profile//?profileId=<%=profile.getId()%>">
+                <i class="material-icons circle">person</i>
+                <span class="title"><%=profile.getName().concat(" ")
+                        .concat(profile.getSurname())%></span>
+                <p><%=profile.getBirthDate().getYear()%>
+                </p>
+            </a>
+            <%}%>
+        </ul>
     </div>
-    <table>
-        <thead>
-        <tr>
-            <th>Name</th>
-        </tr>
-        </thead>
-        <tbody>
-        <% for (Profile profile : movie.getDirectors()) {%>
-        <tr>
-            <td><%=profile.getName().concat(" ").concat(profile.getSurname())%>
-            </td>
-        </tr>
-        <%}%>
-        </tbody>
-    </table>
     <%}%>
 
     <%if (movie.getProducers().size() > 0) { %>
-    <div>
-        <h2>
-            <br>Producers
-        </h2>
+    <div class="green darken-4">
+        <ul class="collection green darken-4">
+            <li class="collection-header green darken-4"><h4 class="white-text">Producers</h4></li>
+            <% for (Profile profile : movie.getProducers()) {%>
+            <a class="collection-item avatar" href="/profile//?profileId=<%=profile.getId()%>">
+                <i class="material-icons circle">person</i>
+                <span class="title"><%=profile.getName().concat(" ")
+                        .concat(profile.getSurname())%></span>
+                <p><%=profile.getBirthDate().getYear()%>
+                </p>
+            </a>
+            <%}%>
+        </ul>
     </div>
-    <table>
-        <thead>
-        <tr>
-            <th>Name</th>
-        </tr>
-        </thead>
-        <tbody>
-        <% for (Profile profile : movie.getProducers()) {%>
-        <tr>
-            <td><%=profile.getName().concat(" ").concat(profile.getSurname())%>
-            </td>
-        </tr>
-        <%}%>
-        </tbody>
-    </table>
     <%}%>
 
     <%if (movie.getActors().size() > 0) { %>
-    <div>
-        <h2>
-            <br>Actors
-        </h2>
+    <div class="green darken-4">
+        <ul class="collection green darken-4">
+            <li class="collection-header green darken-4"><h4 class="white-text">Actors</h4></li>
+            <% for (Profile profile : movie.getActors()) {%>
+            <a class="collection-item avatar" href="/profile//?profileId=<%=profile.getId()%>">
+                <i class="material-icons circle">person</i>
+                <span class="title"><%=profile.getName().concat(" ")
+                        .concat(profile.getSurname())%></span>
+                <p><%=profile.getBirthDate().getYear()%>
+                </p>
+            </a>
+            <%}%>
+        </ul>
     </div>
-    <table>
-        <thead>
-        <tr>
-            <th>Name</th>
-        </tr>
-        </thead>
-        <tbody>
-        <% for (Profile profile : movie.getActors()) {%>
-        <tr>
-            <td><%=profile.getName().concat(" ").concat(profile.getSurname())%>
-            </td>
-        </tr>
-        <%}%>
-        </tbody>
-    </table>
     <%}%>
 
     <%!
