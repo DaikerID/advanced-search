@@ -13,7 +13,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
 <html>
 <%@ include file="fragments/head.jsp" %>
-<body class="grey darken-3">
+<body>
 <%@ include file="fragments/header.jsp" %>
 
 <div class="container">
@@ -95,8 +95,7 @@
                                         .getAttribute("tagsMap");
                                 for (Tag tag : Tag.values()) {%>
                             <option class="white" value="<%=tag.toString()%>"><%=tagsMap
-                                    .get(tag)%>
-                            </option>
+                                    .get(tag)%></option>
                             <%}%>
                         </select>
                     </div>
@@ -113,9 +112,8 @@
                                 Map<Genre, String> genresMap = (HashMap<Genre, String>) request
                                         .getAttribute("genresMap");
                                 for (Genre genre : Genre.values()) {%>
-                            <option class="white" value="<%=genre.toString()%>"><%=genresMap
-                                    .get(genre).trim()%>
-                            </option>
+                            <option class="white" value="<%=genre.toString().trim()%>"><%=genresMap
+                                    .get(genre)%></option>
                             <%}%>
                         </select>
 
@@ -244,112 +242,6 @@
             }
         %>
     </div>
-    <script>
-
-      $(function () {
-        $(document).ready(function () {
-          $('select').material_select();
-        });
-
-        //============-------------ADDING_FIELDS-----------------------------------------
-        $('#addActorButton').click(function () {
-          $(".actorInput").first().clone(true).appendTo(".actorsContainer");
-          return false;
-        });
-
-        $('#addDirectorButton').click(function () {
-          $(".directorInput").first().clone(true).appendTo(".directorsContainer");
-          return false;
-        });
-
-        $('#addProducerButton').click(function () {
-          $(".producerInput").first().clone(true).appendTo(".producerContainer");
-          return false;
-        });
-        //==========-----------------------------------------------------------------------
-        // initialize
-        $('.materialSelect').material_select();
-
-        // setup listener for custom event to re-initialize on change
-        $('.materialSelect').on('contentChanged', function () {
-          $(this).material_select();
-        });
-
-        // update function for demo purposes
-        $("#myButton").click(function () {
-
-          // add new value
-          var newValue = getNewDoggo();
-          var $newOpt = $("<option>").attr("value", newValue).text(newValue)
-          $("#myDropdown").append($newOpt);
-
-          // fire custom event anytime you've updated select
-          $("#myDropdown").trigger('contentChanged');
-
-        });
-
-        $(document).ready(function () {
-          M.updateTextFields();
-        });
-
-      })
-    </script>
-    <style>
-        .select-dropdown {
-            color: #ffffff;
-        }
-
-        ul.dropdown-content.select-dropdown li span {
-            color: #ffffff;
-            background-color: #1b5e20;
-            transition: 0.2s;
-        }
-
-        ul.dropdown-content.select-dropdown li span:hover {
-            background-color: #424242;
-            transition: 0.2s;
-        }
-
-        /* label color */
-        .input-field label {
-            color: #ffffff;
-        }
-
-        /* label focus color */
-        .input-field input[type=text]:focus + label {
-            color: #ffffff;
-        }
-
-        /* label underline focus color */
-        .input-field input[type=text]:focus {
-            border-bottom: 1px solid #ffffff;
-            box-shadow: 0 1px 0 0 #ffffff;
-        }
-
-        /* valid color */
-        .input-field input[type=text].valid {
-            border-bottom: 1px solid #ffffff;
-            box-shadow: 0 1px 0 0 #ffffff;
-        }
-
-        /* invalid color */
-        .input-field input[type=text].invalid {
-            border-bottom: 1px solid #ffffff;
-            box-shadow: 0 1px 0 0 #ffffff;
-        }
-
-        /* icon prefix focus color */
-        .input-field .prefix.active {
-            color: #ffffff;
-        }
-
-        .input-field .helper-text {
-            position: relative;
-            min-height: 18px;
-            display: block;
-            font-size: 12px;
-        }
-    </style>
 </div>
 </body>
 </html>

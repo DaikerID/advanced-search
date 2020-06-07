@@ -1,5 +1,7 @@
 <head>
     <meta name = "viewport" content = "width = device-width, initial-scale = 1">
+    <style><%@include file="/WEB-INF/jsp/css/style.css"%></style>
+    <script><%@include file="/WEB-INF/jsp/js/view.js"%></script>
     <link rel = "stylesheet"
           href = "https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel = "stylesheet"
