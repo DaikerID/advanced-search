@@ -19,12 +19,21 @@
 <div class="container">
     <form action="/advanced-search">
         <h2 class="white-text">Advanced movie search</h2>
-        <p><input type="search" name="movieName" placeholder="By name">
+        <div class="input-field">
+            <input type="text" id="movieName" name="movieName">
+            <label for="movieName">By movie name</label>
+            <span class="helper-text white-text" data-error="wrong" data-success="right">Full name or part of it</span>
+        </div>
         <div class="row">
             <div class="col s6">
                 <div class="actorsContainer">
                     <div class="actorInput">
-                        <input type="search" name="actors" placeholder="By actor">
+                        <div class="input-field">
+                            <input type="text" id="actors" name="actors" class="validate">
+                            <label for="actors">By actor</label>
+                            <span class="helper-text white-text" data-error="wrong"
+                                  data-success="right">Full name or part of it</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -36,8 +45,12 @@
             <div class="col s6">
                 <div class="directorsContainer">
                     <div class="directorInput">
-                        <input type="search" name="directors" placeholder="By director">
-
+                        <div class="input-field">
+                            <input type="text" id="directors" name="directors">
+                            <label for="directors">By director</label>
+                            <span class="helper-text white-text" data-error="wrong"
+                                  data-success="right">Full name or part of it</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -50,8 +63,12 @@
             <div class="col s6">
                 <div class="producerContainer">
                     <div class="producerInput">
-                        <input type="search" name="producers" placeholder="By producer">
-
+                        <div class="input-field">
+                            <input type="text" id="producers" name="producers">
+                            <label for="producers">By producer</label>
+                            <span class="helper-text white-text" data-error="wrong"
+                                  data-success="right">Full name or part of it</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -61,7 +78,10 @@
             </div>
         </div>
 
-        <p><input type="search" name="countries" placeholder="countries">
+        <div class="input-field">
+            <input type="text" id="country" name="countries">
+            <label for="country">By country</label>
+        </div>
 
         <div class="row">
             <div class="col s3">
@@ -74,7 +94,8 @@
                                 Map<Tag, String> tagsMap = (HashMap<Tag, String>) request
                                         .getAttribute("tagsMap");
                                 for (Tag tag : Tag.values()) {%>
-                            <option class="white" value="<%=tag.toString()%>"><%=tagsMap.get(tag)%>
+                            <option class="white" value="<%=tag.toString()%>"><%=tagsMap
+                                    .get(tag)%>
                             </option>
                             <%}%>
                         </select>
@@ -93,7 +114,7 @@
                                         .getAttribute("genresMap");
                                 for (Genre genre : Genre.values()) {%>
                             <option class="white" value="<%=genre.toString()%>"><%=genresMap
-                                    .get(genre)%>
+                                    .get(genre).trim()%>
                             </option>
                             <%}%>
                         </select>
@@ -166,7 +187,8 @@
                 </select>
             </div>
         </div>
-        <button class="btn waves-effect green darken-4" type="submit" name="action">search movie by
+        <button class="btn waves-effect green darken-4" type="submit" name="action">search movie
+            by
             criteria
             <i class="material-icons right">search</i>
         </button>
@@ -177,7 +199,8 @@
             if (movies.size() > 0) {%>
         <div class="green darken-4">
             <ul class="collection green darken-4">
-                <li class="collection-header green darken-4"><h4 class="white-text">Movies</h4></li>
+                <li class="collection-header green darken-4"><h4 class="white-text">Movies</h4>
+                </li>
                 <% for (Movie movie : movies) {%>
                 <a class="collection-item avatar" href="/movie/?movieId=<%=movie.getId()%>">
                     <i class="material-icons circle">movie</i>
@@ -197,9 +220,12 @@
             if (profiles.size() > 0) {%>
         <div class="green darken-4">
             <ul class="collection green darken-4">
-                <li class="collection-header green darken-4"><h4 class="white-text">Profiles</h4></li>
+                <li class="collection-header green darken-4"><h4 class="white-text">
+                    Profiles</h4>
+                </li>
                 <% for (Profile profile : profiles) {%>
-                <a class="collection-item avatar" href="/profile//?profileId=<%=profile.getId()%>">
+                <a class="collection-item avatar"
+                   href="/profile//?profileId=<%=profile.getId()%>">
                     <i class="material-icons circle">person</i>
                     <span class="title"><%=profile.getName().concat(" ")
                             .concat(profile.getSurname())%></span>
@@ -219,10 +245,6 @@
         %>
     </div>
     <script>
-      // document.addEventListener('DOMContentLoaded', function() {
-      //   var elems = document.querySelectorAll('select');
-      //   var instances = M.FormSelect.init(elems, options);
-      // });
 
       $(function () {
         $(document).ready(function () {
@@ -266,7 +288,10 @@
 
         });
 
-        $(".dropdown-content>li>a").css("27, 94, 32", themeColor);
+        $(document).ready(function () {
+          M.updateTextFields();
+        });
+
       })
     </script>
     <style>
@@ -277,6 +302,52 @@
         ul.dropdown-content.select-dropdown li span {
             color: #ffffff;
             background-color: #1b5e20;
+            transition: 0.2s;
+        }
+
+        ul.dropdown-content.select-dropdown li span:hover {
+            background-color: #424242;
+            transition: 0.2s;
+        }
+
+        /* label color */
+        .input-field label {
+            color: #ffffff;
+        }
+
+        /* label focus color */
+        .input-field input[type=text]:focus + label {
+            color: #ffffff;
+        }
+
+        /* label underline focus color */
+        .input-field input[type=text]:focus {
+            border-bottom: 1px solid #ffffff;
+            box-shadow: 0 1px 0 0 #ffffff;
+        }
+
+        /* valid color */
+        .input-field input[type=text].valid {
+            border-bottom: 1px solid #ffffff;
+            box-shadow: 0 1px 0 0 #ffffff;
+        }
+
+        /* invalid color */
+        .input-field input[type=text].invalid {
+            border-bottom: 1px solid #ffffff;
+            box-shadow: 0 1px 0 0 #ffffff;
+        }
+
+        /* icon prefix focus color */
+        .input-field .prefix.active {
+            color: #ffffff;
+        }
+
+        .input-field .helper-text {
+            position: relative;
+            min-height: 18px;
+            display: block;
+            font-size: 12px;
         }
     </style>
 </div>
