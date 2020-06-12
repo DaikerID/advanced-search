@@ -4,7 +4,14 @@
 <%@ page import="com.films.search.advansed.diploma.database.model.values.Tag" %>
 <%@ page import="java.time.format.FormatStyle" %>
 <%@ page import="java.util.Iterator" %>
+<%@ page import="com.films.search.advansed.diploma.frontend.WebMessageCode" %>
+<%@ page import="java.util.HashMap" %>
+<%@ page import="java.util.Map" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    Map<WebMessageCode, String> localeMap = (HashMap<WebMessageCode, String>) request
+            .getAttribute("localeMap");
+%>
 <html>
 <%@ include file="fragments/head.jsp" %>
 <body>

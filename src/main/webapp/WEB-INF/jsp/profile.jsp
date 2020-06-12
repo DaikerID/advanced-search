@@ -3,7 +3,14 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.films.search.advansed.diploma.database.model.common.Movie" %>
+<%@ page import="com.films.search.advansed.diploma.frontend.WebMessageCode" %>
+<%@ page import="java.util.Map" %>
+<%@ page import="java.util.HashMap" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    Map<WebMessageCode, String> localeMap = (HashMap<WebMessageCode, String>) request
+            .getAttribute("localeMap");
+%>
 <html>
 <%@ include file="fragments/head.jsp" %>
 <body>

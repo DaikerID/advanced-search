@@ -15,9 +15,7 @@ public class LocaleMapHandler {
 
   public Map<WebMessageCode, String> getMapForHomePage(Locale locale) {
     Map<WebMessageCode, String> localeMap = new HashMap<>();
-
-    localeMap.put(WebMessageCode.SEARCH,
-        messageSource.getMessage(locale, WebMessageCode.SEARCH));
+    prepareHeaderLabels(localeMap, locale);
     localeMap.put(WebMessageCode.ADVANCED_MOVIE_SEARCH,
         messageSource.getMessage(locale, WebMessageCode.ADVANCED_MOVIE_SEARCH));
     localeMap.put(WebMessageCode.FULL_NAME_OR_PART_OF_IT,
@@ -72,11 +70,22 @@ public class LocaleMapHandler {
     return localeMap;
   }
 
-  public void getMapForProfilePage(ModelAndView model, Locale locale) {
-
+  public Map<WebMessageCode, String> getMapForProfilePage(Locale locale) {
+    Map<WebMessageCode, String> localeMap = new HashMap<>();
+    prepareHeaderLabels(localeMap, locale);
+    return localeMap;
   }
 
-  public void getMapForMoviePage(ModelAndView model, Locale locale) {
+  public Map<WebMessageCode, String> getMapForMoviePage(Locale locale) {
+    Map<WebMessageCode, String> localeMap = new HashMap<>();
+    prepareHeaderLabels(localeMap, locale);
+    return localeMap;
+  }
 
+  private void prepareHeaderLabels(Map<WebMessageCode, String> localeMap, Locale locale) {
+    localeMap.put(WebMessageCode.SEARCH,
+        messageSource.getMessage(locale, WebMessageCode.SEARCH));
+    localeMap.put(WebMessageCode.HEADER,
+        messageSource.getMessage(locale, WebMessageCode.HEADER));
   }
 }
