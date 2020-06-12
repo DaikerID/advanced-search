@@ -8,9 +8,14 @@
 <%@ page import="java.util.HashMap" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Map" %>
+<%@ page import="com.films.search.advansed.diploma.frontend.WebMessageCode" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
+<%
+    Map<WebMessageCode, String> localeMap = (HashMap<WebMessageCode, String>) request
+        .getAttribute("localeMap");
+%>
 <html>
 <%@ include file="fragments/head.jsp" %>
 <body>
@@ -18,11 +23,11 @@
 
 <div class="container">
     <form action="/advanced-search">
-        <h2 class="white-text">Advanced movie search</h2>
+        <h2 class="white-text"><%=localeMap.get(WebMessageCode.ADVANCED_MOVIE_SEARCH)%></h2>
         <div class="input-field">
             <input type="text" id="movieName" name="movieName">
-            <label for="movieName">By movie name</label>
-            <span class="helper-text white-text" data-error="wrong" data-success="right">Full name or part of it</span>
+            <label for="movieName"><%=localeMap.get(WebMessageCode.BY_MOVIE_NAME)%></label>
+            <span class="helper-text white-text" data-error="wrong" data-success="right"><%=localeMap.get(WebMessageCode.FULL_NAME_OR_PART_OF_IT)%></span>
         </div>
         <div class="row">
             <div class="col s6">
@@ -30,15 +35,15 @@
                     <div class="actorInput">
                         <div class="input-field">
                             <input type="text" id="actors" name="actors" class="validate">
-                            <label for="actors">By actor</label>
+                            <label for="actors"><%=localeMap.get(WebMessageCode.BY_ACTOR)%></label>
                             <span class="helper-text white-text" data-error="wrong"
-                                  data-success="right">Full name or part of it</span>
+                                  data-success="right"><%=localeMap.get(WebMessageCode.FULL_NAME_OR_PART_OF_IT)%></span>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col s6">
-                <a class="waves-effect green darken-4 btn" id="addActorButton">Add actor</a>
+                <a class="waves-effect green darken-4 btn" id="addActorButton"><%=localeMap.get(WebMessageCode.ADD_ACTOR)%></a>
             </div>
         </div>
         <div class="row">
@@ -47,16 +52,15 @@
                     <div class="directorInput">
                         <div class="input-field">
                             <input type="text" id="directors" name="directors">
-                            <label for="directors">By director</label>
+                            <label for="directors"><%=localeMap.get(WebMessageCode.BY_DIRECTOR)%></label>
                             <span class="helper-text white-text" data-error="wrong"
-                                  data-success="right">Full name or part of it</span>
+                                  data-success="right"><%=localeMap.get(WebMessageCode.FULL_NAME_OR_PART_OF_IT)%></span>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col s6">
-                <a class="waves-effect green darken-4 btn" id="addDirectorButton">Add
-                    director</a>
+                <a class="waves-effect green darken-4 btn" id="addDirectorButton"><%=localeMap.get(WebMessageCode.ADD_DIRECTOR)%></a>
             </div>
         </div>
         <div class="row">
@@ -65,31 +69,30 @@
                     <div class="producerInput">
                         <div class="input-field">
                             <input type="text" id="producers" name="producers">
-                            <label for="producers">By producer</label>
+                            <label for="producers"><%=localeMap.get(WebMessageCode.BY_PRODUCER)%></label>
                             <span class="helper-text white-text" data-error="wrong"
-                                  data-success="right">Full name or part of it</span>
+                                  data-success="right"><%=localeMap.get(WebMessageCode.FULL_NAME_OR_PART_OF_IT)%></span>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col s6">
-                <a class="waves-effect green darken-4 btn" id="addProducerButton">Add
-                    producer</a>
+                <a class="waves-effect green darken-4 btn" id="addProducerButton"><%=localeMap.get(WebMessageCode.ADD_PRODUCER)%></a>
             </div>
         </div>
 
         <div class="input-field">
             <input type="text" id="country" name="countries">
-            <label for="country">By country</label>
+            <label for="country"><%=localeMap.get(WebMessageCode.BY_COUNTRY)%></label>
         </div>
 
         <div class="row">
             <div class="col s3">
                 <div class="tagSelectorContainer">
-                    <label>Choose a tags:</label>
+                    <label><%=localeMap.get(WebMessageCode.CHOOSE_TAG)%></label>
                     <div class="tagSelector">
                         <select name="tags" multiple>
-                            <option class="white" value="-" disabled selected>By tag</option>
+                            <option class="white" value="-" disabled selected><%=localeMap.get(WebMessageCode.BY_TAG)%></option>
                             <%
                                 Map<Tag, String> tagsMap = (HashMap<Tag, String>) request
                                         .getAttribute("tagsMap");
@@ -104,10 +107,10 @@
 
             <div class="col s3">
                 <div class="genreSelectorContainer">
-                    <label>Choose a genre:</label>
+                    <label><%=localeMap.get(WebMessageCode.CHOOSE_GENRE)%></label>
                     <div class="genreSelector">
                         <select name="genres" multiple>
-                            <option class="white" value="-" disabled selected>By genre</option>
+                            <option class="white" value="-" disabled selected><%=localeMap.get(WebMessageCode.BY_GENRE)%></option>
                             <%
                                 Map<Genre, String> genresMap = (HashMap<Genre, String>) request
                                         .getAttribute("genresMap");
@@ -122,10 +125,10 @@
             </div>
         </div>
         <div class="row">
-            <p><label>Choose a begining of release date interval:</label>
+            <p><label><%=localeMap.get(WebMessageCode.START_DATE_INTERVAL)%></label>
             <div class="col s1">
                 <select name="releaseDayStart">
-                    <option value="-">day</option>
+                    <option value="-"><%=localeMap.get(WebMessageCode.AFTER_DAY)%></option>
                     <% for (int i = 1; i <= 31; i++) {%>
                     <option value="<%=i%>"><%=i%>
                     </option>
@@ -134,7 +137,7 @@
             </div>
             <div class="col s3">
                 <select name="releaseMonthStart">
-                    <option value="-">after month</option>
+                    <option value="-"><%=localeMap.get(WebMessageCode.AFTER_MONTH)%></option>
                     <%
                         Map<Month, String> monthsMap = (HashMap<Month, String>) request
                                 .getAttribute("monthsMap");
@@ -146,7 +149,7 @@
             </div>
             <div class="col s2">
                 <select name="releaseYearStart">
-                    <option value="-">after year</option>
+                    <option value="-"><%=localeMap.get(WebMessageCode.AFTER_YEAR)%></option>
                     <% int firstFilmYear = LocalDateTimeUtils.FIRST_FILM_DATE.getYear();
                         for (int i = LocalDate.now().getYear(); i >= firstFilmYear; i--) {%>
                     <option value="<%=i%>"><%=i%>
@@ -156,10 +159,10 @@
             </div>
         </div>
         <div class="row">
-            <p><label>Choose a ending of release date interval:</label>
+            <p><label><%=localeMap.get(WebMessageCode.END_DATE_INTERVAL)%></label>
             <div class="col s1">
                 <select name="releaseDayEnd">
-                    <option value="-">day</option>
+                    <option value="-"><%=localeMap.get(WebMessageCode.BEFORE_DAY)%></option>
                     <% for (int i = 1; i <= 31; i++) {%>
                     <option value="<%=i%>"><%=i%>
                     </option>
@@ -168,7 +171,7 @@
             </div>
             <div class="col s3">
                 <select name="releaseMonthEnd">
-                    <option value="-">before month</option>
+                    <option value="-"><%=localeMap.get(WebMessageCode.BEFORE_MONTH)%></option>
                     <% for (Month month : Month.values()) {%>
                     <option value="<%=month.toString()%>"><%=monthsMap.get(month)%>
                     </option>
@@ -177,7 +180,7 @@
             </div>
             <div class="col s2">
                 <select name="releaseYearEnd">
-                    <option value="-">before year</option>
+                    <option value="-"><%=localeMap.get(WebMessageCode.BEFORE_YEAR)%></option>
                     <% for (int i = LocalDate.now().getYear(); i >= firstFilmYear; i--) {%>
                     <option value="<%=i%>"><%=i%>
                     </option>
@@ -185,9 +188,7 @@
                 </select>
             </div>
         </div>
-        <button class="btn waves-effect green darken-4" type="submit" name="action">search movie
-            by
-            criteria
+        <button class="btn waves-effect green darken-4" type="submit" name="action"><%=localeMap.get(WebMessageCode.SEARCH_MOVIE_BY_CRITERIA)%>
             <i class="material-icons right">search</i>
         </button>
     </form>
@@ -197,7 +198,7 @@
             if (movies.size() > 0) {%>
         <div class="green darken-4">
             <ul class="collection green darken-4">
-                <li class="collection-header green darken-4"><h4 class="white-text">Movies</h4>
+                <li class="collection-header green darken-4"><h4 class="white-text"><%=localeMap.get(WebMessageCode.MOVIES_SEARCH_RESULT_HEADER)%></h4>
                 </li>
                 <% for (Movie movie : movies) {%>
                 <a class="collection-item avatar" href="/movie/?movieId=<%=movie.getId()%>">
@@ -219,7 +220,7 @@
         <div class="green darken-4">
             <ul class="collection green darken-4">
                 <li class="collection-header green darken-4"><h4 class="white-text">
-                    Profiles</h4>
+                    <%=localeMap.get(WebMessageCode.PROFILES_SEARCH_RESULT_HEADER)%></h4>
                 </li>
                 <% for (Profile profile : profiles) {%>
                 <a class="collection-item avatar"

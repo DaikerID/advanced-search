@@ -6,10 +6,12 @@ import com.films.search.advansed.diploma.controller.form.AdvancedSearchForm;
 import com.films.search.advansed.diploma.controller.form.SearchForm;
 import com.films.search.advansed.diploma.database.model.common.Movie;
 import com.films.search.advansed.diploma.database.model.common.Profile;
+import com.films.search.advansed.diploma.frontend.LocaleMapHandler;
 import com.films.search.advansed.diploma.frontend.WebMessageCode;
 import com.films.search.advansed.diploma.frontend.WebMessageSource;
 import com.films.search.advansed.diploma.search.service.SearchService;
 import java.util.List;
+import java.util.Locale;
 import lombok.AllArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Controller;
@@ -21,30 +23,31 @@ import org.springframework.web.servlet.ModelAndView;
 public class HomePageController {
 
   WebMessageSource messageSource;
+  LocaleMapHandler localeMapHandler;
   SearchService searchService;
 
   @GetMapping(value = "/")
-  public ModelAndView printHello() {
+  public ModelAndView printHello(Locale locale) {
     ModelAndView model = new ModelAndView("index");
     model.addObject("movies", List.of());
     model.addObject("profiles", List.of());
-    prepareForAdvancedSearchForm(model);
+    model.addObject("localeMap", localeMapHandler.getMapForHomePage(locale));
+    prepareForAdvancedSearchForm(model, locale);
     return model;
   }
 
   @GetMapping(value = "/test")
   public ModelAndView print() {
     ModelAndView model = new ModelAndView("test");
-    prepareForAdvancedSearchForm(model);
     return model;
   }
 
   @GetMapping("/search")
-  public ModelAndView searchUser(SearchForm searchForm) {
+  public ModelAndView searchUser(SearchForm searchForm, Locale locale) {
     ModelAndView model = new ModelAndView();
-    prepareForAdvancedSearchForm(model);
+    prepareForAdvancedSearchForm(model, locale);
     model.addObject("search", searchForm.getSearchLine());
-    prepareModelForShowResults(model,
+    prepareModelForShowResults(model, locale,
         searchService.findAllMoviesByName(searchForm.getSearchLine()),
         searchService.findAllProfilesByName(searchForm.getSearchLine(),
             Specification.where(isAnyone())));
@@ -52,21 +55,21 @@ public class HomePageController {
   }
 
   @GetMapping("/advanced-search")
-  public ModelAndView searchUser(AdvancedSearchForm searchForm) {
+  public ModelAndView searchUser(AdvancedSearchForm searchForm, Locale locale) {
     ModelAndView model = new ModelAndView();
-    prepareForAdvancedSearchForm(model);
-    prepareModelForShowResults(model, searchService.findAllMoviesByAdvancedForm(searchForm),
+    prepareForAdvancedSearchForm(model, locale);
+    prepareModelForShowResults(model, locale, searchService.findAllMoviesByAdvancedForm(searchForm),
         List.of());
     return model;
   }
 
-  private void prepareForAdvancedSearchForm(ModelAndView model) {
-    model.addObject("genresMap", messageSource.getGenresMap());
-    model.addObject("tagsMap", messageSource.getTagsMap());
-    model.addObject("monthsMap", messageSource.getMonthsMap());
+  private void prepareForAdvancedSearchForm(ModelAndView model, Locale locale) {
+    model.addObject("genresMap", messageSource.getGenresMap(locale));
+    model.addObject("tagsMap", messageSource.getTagsMap(locale));
+    model.addObject("monthsMap", messageSource.getMonthsMap(locale));
   }
 
-  private void prepareModelForShowResults(ModelAndView model, List<Movie> movieList,
+  private void prepareModelForShowResults(ModelAndView model, Locale locale, List<Movie> movieList,
       List<Profile> profileList) {
     if (movieList.size() == 1 && profileList.size() == 0) {
       model.setViewName("movie");
@@ -78,11 +81,14 @@ public class HomePageController {
       model.setViewName("index");
       model.addObject("movies", movieList);
       model.addObject("profiles", profileList);
+      model.addObject("localeMap", localeMapHandler.getMapForHomePage(locale));
     } else {
       model.setViewName("index");
-      model.addObject("NO_RESULTS", messageSource.getMessage(WebMessageCode.NO_RESULTS));
+      model.addObject("NO_RESULTS",
+          messageSource.getMessage(locale, WebMessageCode.NO_RESULTS));
       model.addObject("movies", List.of());
       model.addObject("profiles", List.of());
+      model.addObject("localeMap", localeMapHandler.getMapForHomePage(locale));
     }
   }
 }

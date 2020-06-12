@@ -20,28 +20,32 @@ public class WebMessageSource {
     return messageSource.getMessage(code.toString(), args, Locale.getDefault());
   }
 
-  public Map<Genre, String> getGenresMap(Object... args) {
+  public String getMessage(Locale locale, WebMessageCode code, Object... args) {
+    return messageSource.getMessage(code.toString(), args, locale);
+  }
+
+  public Map<Genre, String> getGenresMap(Locale locale, Object... args) {
     Map<Genre, String> genreStringMap = new HashMap<>();
     for (Genre genre : Genre.values()) {
       genreStringMap
-          .put(genre, messageSource.getMessage(genre.toString(), args, Locale.getDefault()));
+          .put(genre, messageSource.getMessage(genre.toString(), args, locale));
     }
     return genreStringMap;
   }
 
-  public Map<Tag, String> getTagsMap(Object... args) {
+  public Map<Tag, String> getTagsMap(Locale locale, Object... args) {
     Map<Tag, String> tagStringHashMap = new HashMap<>();
     for (Tag tag : Tag.values()) {
       tagStringHashMap
-          .put(tag, messageSource.getMessage(tag.toString(), args, Locale.getDefault()));
+          .put(tag, messageSource.getMessage(tag.toString(), args, locale));
     }
     return tagStringHashMap;
   }
 
-  public Map<Month, String> getMonthsMap(Object... args) {
+  public Map<Month, String> getMonthsMap(Locale locale, Object... args) {
     Map<Month, String> monthStringHashMap = new HashMap<>();
     for (Month month : Month.values()) {
-      monthStringHashMap.put(month, month.name());
+      monthStringHashMap.put(month, messageSource.getMessage(month.toString(), args, locale));
     }
     return monthStringHashMap;
   }
