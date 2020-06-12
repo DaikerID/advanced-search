@@ -2,8 +2,8 @@ package com.films.search.advansed.diploma.search.service;
 
 import com.films.search.advansed.diploma.controller.form.AdvancedSearchForm;
 import com.films.search.advansed.diploma.search.entities.AdvancedSearchQuery;
-import com.films.search.advansed.diploma.database.model.Movie;
-import com.films.search.advansed.diploma.database.model.Profile;
+import com.films.search.advansed.diploma.database.model.common.Movie;
+import com.films.search.advansed.diploma.database.model.common.Profile;
 import com.films.search.advansed.diploma.database.service.MovieService;
 import com.films.search.advansed.diploma.database.service.ProfileService;
 import java.util.ArrayList;
@@ -30,6 +30,4 @@ public class SearchService {
   public List<Profile> findAllProfilesByName(String name, Specification<Profile> specification){
     return profileService.findAllProfilesByNameContains(name.trim(), specification);
   }
-
-  ;
 }

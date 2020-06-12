@@ -1,10 +1,14 @@
 package com.films.search.advansed.diploma.bootstrap;
 
-import com.films.search.advansed.diploma.database.model.Genre;
-import com.films.search.advansed.diploma.database.model.Movie;
-import com.films.search.advansed.diploma.database.model.Profile;
+import com.films.search.advansed.diploma.database.model.common.Movie;
+import com.films.search.advansed.diploma.database.model.common.OnlineCinema;
+import com.films.search.advansed.diploma.database.model.common.Profile;
+import com.films.search.advansed.diploma.database.model.values.Genre;
 import com.films.search.advansed.diploma.database.repository.MovieRepository;
+import com.films.search.advansed.diploma.database.repository.OnlineCinemaRepository;
 import com.films.search.advansed.diploma.database.repository.ProfileRepository;
+import com.films.search.advansed.diploma.view.offer.model.PriceType;
+import com.films.search.advansed.diploma.view.offer.model.ViewOffer;
 import java.time.LocalDate;
 import java.util.Set;
 import javax.transaction.Transactional;
@@ -18,6 +22,7 @@ public class Bootstrap implements CommandLineRunner {
 
   private final ProfileRepository profileRepository;
   private final MovieRepository movieRepository;
+  private final OnlineCinemaRepository onlineCinemaRepository;
 
   @Override
   @Transactional

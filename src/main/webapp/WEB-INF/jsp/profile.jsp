@@ -1,8 +1,8 @@
-<%@ page import="com.films.search.advansed.diploma.database.model.Profile" %>
+<%@ page import="com.films.search.advansed.diploma.database.model.common.Profile" %>
 <%@ page import="java.time.format.FormatStyle" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="com.films.search.advansed.diploma.database.model.Movie" %>
+<%@ page import="com.films.search.advansed.diploma.database.model.common.Movie" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <%@ include file="fragments/head.jsp" %>

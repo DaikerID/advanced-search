@@ -1,5 +1,8 @@
-package com.films.search.advansed.diploma.database.model;
+package com.films.search.advansed.diploma.database.model.common;
 
+import com.films.search.advansed.diploma.database.model.values.Genre;
+import com.films.search.advansed.diploma.database.model.values.Tag;
+import com.films.search.advansed.diploma.view.offer.model.ViewOffer;
 import java.time.LocalDate;
 import java.util.Set;
 import javax.persistence.ElementCollection;
@@ -28,6 +31,9 @@ public class Movie {
   private String country;
   private LocalDate premierDate;
   private Integer lengthInMinutes;
+
+//  @ElementCollection
+//  private Set<ViewOffer> viewOffers;
 
   @ElementCollection
   private Set<Genre> genres;

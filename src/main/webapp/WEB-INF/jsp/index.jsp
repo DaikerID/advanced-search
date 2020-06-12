@@ -1,8 +1,8 @@
 <%@ page import="com.films.search.advansed.diploma.LocalDateTimeUtils" %>
-<%@ page import="com.films.search.advansed.diploma.database.model.Genre" %>
-<%@ page import="com.films.search.advansed.diploma.database.model.Movie" %>
-<%@ page import="com.films.search.advansed.diploma.database.model.Profile" %>
-<%@ page import="com.films.search.advansed.diploma.database.model.Tag" %>
+<%@ page import="com.films.search.advansed.diploma.database.model.values.Genre" %>
+<%@ page import="com.films.search.advansed.diploma.database.model.common.Movie" %>
+<%@ page import="com.films.search.advansed.diploma.database.model.common.Profile" %>
+<%@ page import="com.films.search.advansed.diploma.database.model.values.Tag" %>
 <%@ page import="java.time.LocalDate" %>
 <%@ page import="java.time.Month" %>
 <%@ page import="java.util.HashMap" %>
@@ -243,5 +243,28 @@
         %>
     </div>
 </div>
+<script>
+  $(function () {
+    $(document).ready(function () {
+      $('select').material_select();
+    });
+
+    //============-------------ADDING_FIELDS-----------------------------------------
+    $('#addActorButton').click(function () {
+      $(".actorInput").first().clone(true).appendTo(".actorsContainer");
+      return false;
+    });
+
+    $('#addDirectorButton').click(function () {
+      $(".directorInput").first().clone(true).appendTo(".directorsContainer");
+      return false;
+    });
+
+    $('#addProducerButton').click(function () {
+      $(".producerInput").first().clone(true).appendTo(".producerContainer");
+      return false;
+    });
+  })
+</script>
 </body>
 </html>

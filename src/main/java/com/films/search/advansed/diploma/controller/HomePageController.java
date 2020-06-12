@@ -4,8 +4,8 @@ import static com.films.search.advansed.diploma.search.utils.ProfileSearchSpecif
 
 import com.films.search.advansed.diploma.controller.form.AdvancedSearchForm;
 import com.films.search.advansed.diploma.controller.form.SearchForm;
-import com.films.search.advansed.diploma.database.model.Movie;
-import com.films.search.advansed.diploma.database.model.Profile;
+import com.films.search.advansed.diploma.database.model.common.Movie;
+import com.films.search.advansed.diploma.database.model.common.Profile;
 import com.films.search.advansed.diploma.frontend.WebMessageCode;
 import com.films.search.advansed.diploma.frontend.WebMessageSource;
 import com.films.search.advansed.diploma.search.service.SearchService;

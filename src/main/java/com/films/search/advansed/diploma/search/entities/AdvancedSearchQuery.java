@@ -3,8 +3,8 @@ package com.films.search.advansed.diploma.search.entities;
 import static com.films.search.advansed.diploma.LocalDateTimeUtils.parseInterval;
 
 import com.films.search.advansed.diploma.controller.form.AdvancedSearchForm;
-import com.films.search.advansed.diploma.database.model.Genre;
-import com.films.search.advansed.diploma.database.model.Tag;
+import com.films.search.advansed.diploma.database.model.values.Genre;
+import com.films.search.advansed.diploma.database.model.values.Tag;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;

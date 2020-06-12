@@ -3,7 +3,7 @@ package com.films.search.advansed.diploma.database.service;
 import static com.films.search.advansed.diploma.search.utils.MovieSearchSpecificationUtils.*;
 
 import com.films.search.advansed.diploma.search.entities.AdvancedSearchQuery;
-import com.films.search.advansed.diploma.database.model.Movie;
+import com.films.search.advansed.diploma.database.model.common.Movie;
 import com.films.search.advansed.diploma.database.repository.MovieRepository;
 import java.util.ArrayList;
 import java.util.HashSet;

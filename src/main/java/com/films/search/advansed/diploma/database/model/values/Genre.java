@@ -1,4 +1,4 @@
-package com.films.search.advansed.diploma.database.model;
+package com.films.search.advansed.diploma.database.model.values;
 
 public enum Genre {
   DRAMA,

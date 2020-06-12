@@ -2,7 +2,7 @@ package com.films.search.advansed.diploma.database.service;
 
 import static com.films.search.advansed.diploma.search.utils.ProfileSearchSpecificationUtils.*;
 
-import com.films.search.advansed.diploma.database.model.Profile;
+import com.films.search.advansed.diploma.database.model.common.Profile;
 import com.films.search.advansed.diploma.database.repository.ProfileRepository;
 import java.util.ArrayList;
 import java.util.HashSet;

@@ -1,4 +1,4 @@
-<%@ page import="com.films.search.advansed.diploma.database.model.Tag" %>
+<%@ page import="com.films.search.advansed.diploma.database.model.values.Tag" %>
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.HashMap" %><%--
   Created by IntelliJ IDEA.

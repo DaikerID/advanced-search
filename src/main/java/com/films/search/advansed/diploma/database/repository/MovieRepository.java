@@ -1,6 +1,6 @@
 package com.films.search.advansed.diploma.database.repository;
 
-import com.films.search.advansed.diploma.database.model.Movie;
+import com.films.search.advansed.diploma.database.model.common.Movie;
 import java.util.List;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;

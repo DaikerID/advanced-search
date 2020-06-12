@@ -1,7 +1,7 @@
 package com.films.search.advansed.diploma.frontend;
 
-import com.films.search.advansed.diploma.database.model.Genre;
-import com.films.search.advansed.diploma.database.model.Tag;
+import com.films.search.advansed.diploma.database.model.values.Genre;
+import com.films.search.advansed.diploma.database.model.values.Tag;
 import java.time.Month;
 import java.util.HashMap;
 import java.util.Locale;

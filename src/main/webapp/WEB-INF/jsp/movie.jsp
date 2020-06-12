@@ -1,7 +1,7 @@
-<%@ page import="com.films.search.advansed.diploma.database.model.Genre" %>
-<%@ page import="com.films.search.advansed.diploma.database.model.Movie" %>
-<%@ page import="com.films.search.advansed.diploma.database.model.Profile" %>
-<%@ page import="com.films.search.advansed.diploma.database.model.Tag" %>
+<%@ page import="com.films.search.advansed.diploma.database.model.values.Genre" %>
+<%@ page import="com.films.search.advansed.diploma.database.model.common.Movie" %>
+<%@ page import="com.films.search.advansed.diploma.database.model.common.Profile" %>
+<%@ page import="com.films.search.advansed.diploma.database.model.values.Tag" %>
 <%@ page import="java.time.format.FormatStyle" %>
 <%@ page import="java.util.Iterator" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>

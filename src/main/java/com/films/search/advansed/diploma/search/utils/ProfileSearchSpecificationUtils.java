@@ -1,6 +1,6 @@
 package com.films.search.advansed.diploma.search.utils;
 
-import com.films.search.advansed.diploma.database.model.Profile;
+import com.films.search.advansed.diploma.database.model.common.Profile;
 import javax.persistence.criteria.Predicate;
 import org.springframework.data.jpa.domain.Specification;
 
