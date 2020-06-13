@@ -3,6 +3,7 @@ package com.films.search.advansed.diploma.controller;
 import com.films.search.advansed.diploma.database.model.common.Movie;
 import com.films.search.advansed.diploma.database.service.MovieService;
 import com.films.search.advansed.diploma.frontend.LocaleMapHandler;
+import com.films.search.advansed.diploma.frontend.WebMessageSource;
 import com.films.search.advansed.diploma.view.offer.service.ViewOfferService;
 import java.util.Locale;
 import java.util.Optional;
@@ -19,6 +20,7 @@ public class MovieController {
   private final MovieService movieService;
   private final LocaleMapHandler localeMapHandler;
   private final ViewOfferService viewOfferService;
+  private final WebMessageSource messageSource;
 
   @RequestMapping(value = "/movie/")
   public ModelAndView getMovie(@RequestParam Long movieId, Locale locale) {
@@ -30,6 +32,8 @@ public class MovieController {
       model.addObject("movie", movie);
       model.addObject("localeMap", localeMapHandler.getMapForMoviePage(locale));
       model.addObject("viewOffers", viewOfferService.getOffersToWatch(movie.getName()));
+      model.addObject("tagsMap", messageSource.getTagsMap(locale));
+      model.addObject("genresMap", messageSource.getGenresMap(locale));
       return model;
     }
     return new ModelAndView("error");

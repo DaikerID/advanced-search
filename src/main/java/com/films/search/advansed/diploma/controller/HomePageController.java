@@ -74,9 +74,11 @@ public class HomePageController {
     if (movieList.size() == 1 && profileList.size() == 0) {
       model.setViewName("movie");
       model.addObject("movie", movieList.get(0));
+      model.addObject("localeMap", localeMapHandler.getMapForMoviePage(locale));
     } else if (profileList.size() == 1 && movieList.size() == 0) {
       model.setViewName("profile");
       model.addObject("profile", profileList.get(0));
+      model.addObject("localeMap", localeMapHandler.getMapForProfilePage(locale));
     } else if (movieList.size() > 0 || profileList.size() > 0) {
       model.setViewName("index");
       model.addObject("movies", movieList);

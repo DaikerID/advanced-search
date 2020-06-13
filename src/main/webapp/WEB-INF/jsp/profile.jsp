@@ -27,12 +27,12 @@
     <table>
         <tbody>
         <tr>
-            <td class="white-text">Career:</td>
-            <td class="white-text"><%=getCareerList(profile)%>
+            <td class="white-text"><%=localeMap.get(WebMessageCode.CAREER)%>:</td>
+            <td class="white-text"><%=getCareerList(profile, localeMap)%>
             </td>
         </tr>
         <tr>
-            <td class="white-text">Birth date:</td>
+            <td class="white-text"><%=localeMap.get(WebMessageCode.BIRTH_DATE)%>:</td>
             <td class="white-text"><%=profile.getBirthDate()
                     .format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG))%>
             </td>
@@ -45,8 +45,8 @@
         <div class="col s4">
             <div class="green darken-4">
                 <ul class="collection green darken-4">
-                    <li class="collection-header green darken-4"><h5 class="white-text">As
-                        actor</h5></li>
+                    <li class="collection-header green darken-4"><h5 class="white-text">
+                        <%=localeMap.get(WebMessageCode.AS_ACTOR)%></h5></li>
                     <% for (Movie movie : profile.getActor()) {%>
                     <a class="collection-item avatar" href="/movie/?movieId=<%=movie.getId()%>">
                         <i class="material-icons circle">movie</i>
@@ -65,8 +65,8 @@
         <div class="col s4">
             <div class="green darken-4">
                 <ul class="collection green darken-4">
-                    <li class="collection-header green darken-4"><h5 class="white-text">As
-                        director</h5>
+                    <li class="collection-header green darken-4"><h5 class="white-text">
+                        <%=localeMap.get(WebMessageCode.AS_DIRECTOR)%></h5>
                     </li>
                     <% for (Movie movie : profile.getDirector()) {%>
                     <a class="collection-item avatar" href="/movie/?movieId=<%=movie.getId()%>">
@@ -86,7 +86,9 @@
         <div class="col s4">
         <div class="green darken-4">
             <ul class="collection green darken-4">
-                <li class="collection-header green darken-4"><h5 class="white-text">As producer</h5>
+                <li class="collection-header green darken-4"><h5 class="white-text">
+                    <%=localeMap.get(WebMessageCode.AS_PRODUCER)%>
+                </h5>
                 </li>
                 <% for (Movie movie : profile.getProducer()) {%>
                 <a class="collection-item avatar" href="/movie/?movieId=<%=movie.getId()%>">
@@ -103,16 +105,16 @@
         <%}%>
     </div>
     <%!
-        public String getCareerList(Profile profile) {
+        public String getCareerList(Profile profile, Map<WebMessageCode, String> localeMap) {
             List<String> careers = new ArrayList<>();
             if (profile.getActor().size() > 0) {
-                careers.add("Actor");
+                careers.add(localeMap.get(WebMessageCode.ACTOR));
             }
             if (profile.getDirector().size() > 0) {
-                careers.add("Director");
+                careers.add(localeMap.get(WebMessageCode.DIRECTOR));
             }
             if (profile.getProducer().size() > 0) {
-                careers.add("Producer");
+                careers.add(localeMap.get(WebMessageCode.PRODUCER));
             }
             StringBuilder careerString = new StringBuilder();
             for (String career : careers) {
@@ -121,7 +123,7 @@
                     careerString.append(", ");
                 }
             }
-            return careerString.toString().equals("") ? "none" : careerString.toString();
+            return careerString.toString().equals("") ? "-" : careerString.toString();
         }
     %>
 </div>

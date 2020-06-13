@@ -5,7 +5,6 @@ import com.films.search.advansed.diploma.database.service.ProfileService;
 import com.films.search.advansed.diploma.frontend.LocaleMapHandler;
 import java.util.Locale;
 import java.util.Optional;
-import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequiredArgsConstructor
 public class ProfileController {
 
-  LocaleMapHandler localeMapHandler;
+  private final LocaleMapHandler localeMapHandler;
   private final ProfileService profileService;
 
   @RequestMapping(value = "/profile/")
@@ -26,7 +25,7 @@ public class ProfileController {
 
     if (profileOptional.isPresent()) {
       model.addObject("profile", profileOptional.get());
-      model.addObject("localeMap", localeMapHandler.getMapForMoviePage(locale));
+      model.addObject("localeMap", localeMapHandler.getMapForProfilePage(locale));
       return model;
     }
     return new ModelAndView("error");

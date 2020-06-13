@@ -5,7 +5,6 @@ import java.util.Locale;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import org.springframework.web.servlet.ModelAndView;
 
 @Component
 @RequiredArgsConstructor
@@ -73,11 +72,46 @@ public class LocaleMapHandler {
   public Map<WebMessageCode, String> getMapForProfilePage(Locale locale) {
     Map<WebMessageCode, String> localeMap = new HashMap<>();
     prepareHeaderLabels(localeMap, locale);
+    localeMap.put(WebMessageCode.CAREER,
+        messageSource.getMessage(locale, WebMessageCode.CAREER));
+    localeMap.put(WebMessageCode.ACTOR,
+        messageSource.getMessage(locale, WebMessageCode.ACTOR));
+    localeMap.put(WebMessageCode.DIRECTOR,
+        messageSource.getMessage(locale, WebMessageCode.DIRECTOR));
+    localeMap.put(WebMessageCode.PRODUCER,
+        messageSource.getMessage(locale, WebMessageCode.PRODUCER));
+    localeMap.put(WebMessageCode.BIRTH_DATE,
+        messageSource.getMessage(locale, WebMessageCode.BIRTH_DATE));
+    localeMap.put(WebMessageCode.AS_ACTOR,
+        messageSource.getMessage(locale, WebMessageCode.AS_ACTOR));
+    localeMap.put(WebMessageCode.AS_DIRECTOR,
+        messageSource.getMessage(locale, WebMessageCode.AS_DIRECTOR));
+    localeMap.put(WebMessageCode.AS_PRODUCER,
+        messageSource.getMessage(locale, WebMessageCode.AS_PRODUCER));
+
     return localeMap;
   }
 
   public Map<WebMessageCode, String> getMapForMoviePage(Locale locale) {
     Map<WebMessageCode, String> localeMap = new HashMap<>();
+    localeMap.put(WebMessageCode.COUNTRY,
+        messageSource.getMessage(locale, WebMessageCode.COUNTRY));
+    localeMap.put(WebMessageCode.PREMIER_DATE,
+        messageSource.getMessage(locale, WebMessageCode.PREMIER_DATE));
+    localeMap.put(WebMessageCode.TIME,
+        messageSource.getMessage(locale, WebMessageCode.TIME));
+    localeMap.put(WebMessageCode.MINUTES,
+        messageSource.getMessage(locale, WebMessageCode.MINUTES));
+    localeMap.put(WebMessageCode.GENRE,
+        messageSource.getMessage(locale, WebMessageCode.GENRE));
+    localeMap.put(WebMessageCode.TAGS,
+        messageSource.getMessage(locale, WebMessageCode.TAGS));
+    localeMap.put(WebMessageCode.ACTORS,
+        messageSource.getMessage(locale, WebMessageCode.ACTORS));
+    localeMap.put(WebMessageCode.DIRECTORS,
+        messageSource.getMessage(locale, WebMessageCode.DIRECTORS));
+    localeMap.put(WebMessageCode.PRODUCERS,
+        messageSource.getMessage(locale, WebMessageCode.PRODUCERS));
     prepareHeaderLabels(localeMap, locale);
     return localeMap;
   }
