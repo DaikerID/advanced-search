@@ -1,4 +1,4 @@
-<%@ page import="com.films.search.advansed.diploma.LocalDateTimeUtils" %>
+<%@ page import="com.films.search.advansed.diploma.search.utils.LocalDateTimeUtils" %>
 <%@ page import="com.films.search.advansed.diploma.database.model.values.Genre" %>
 <%@ page import="com.films.search.advansed.diploma.database.model.common.Movie" %>
 <%@ page import="com.films.search.advansed.diploma.database.model.common.Profile" %>

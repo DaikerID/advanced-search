@@ -1,4 +1,4 @@
-package com.films.search.advansed.diploma;
+package com.films.search.advansed.diploma.search.utils;
 
 import com.films.search.advansed.diploma.controller.form.AdvancedSearchForm;
 import com.films.search.advansed.diploma.search.entities.LocalDateInterval;
