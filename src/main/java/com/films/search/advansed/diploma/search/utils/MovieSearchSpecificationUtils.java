@@ -1,8 +1,8 @@
 package com.films.search.advansed.diploma.search.utils;
 
-import com.films.search.advansed.diploma.database.model.values.Genre;
 import com.films.search.advansed.diploma.database.model.common.Movie;
 import com.films.search.advansed.diploma.database.model.common.Profile;
+import com.films.search.advansed.diploma.database.model.values.Genre;
 import com.films.search.advansed.diploma.database.model.values.Tag;
 import com.films.search.advansed.diploma.search.entities.AdvancedSearchQuery;
 import java.time.LocalDate;

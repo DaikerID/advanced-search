@@ -1,6 +1,6 @@
 package com.films.search.advansed.diploma.search.entities;
 
-import static com.films.search.advansed.diploma.search.utils.LocalDateTimeUtils.parseInterval;
+import static com.films.search.advansed.diploma.search.utils.LocalDateUtils.parseInterval;
 
 import com.films.search.advansed.diploma.controller.form.AdvancedSearchForm;
 import com.films.search.advansed.diploma.database.model.values.Genre;

@@ -59,6 +59,4 @@ public class ProfileSearchSpecificationUtils {
   public static Specification<Profile> isDirector() {
     return (Specification<Profile>) (root, query, cb) -> cb.greaterThan(cb.size(root.get("director")), 0);
   }
-
-
 }

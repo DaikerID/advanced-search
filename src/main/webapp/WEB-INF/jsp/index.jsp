@@ -1,4 +1,4 @@
-<%@ page import="com.films.search.advansed.diploma.search.utils.LocalDateTimeUtils" %>
+<%@ page import="com.films.search.advansed.diploma.search.utils.LocalDateUtils" %>
 <%@ page import="com.films.search.advansed.diploma.database.model.values.Genre" %>
 <%@ page import="com.films.search.advansed.diploma.database.model.common.Movie" %>
 <%@ page import="com.films.search.advansed.diploma.database.model.common.Profile" %>
@@ -150,7 +150,7 @@
             <div class="col s2">
                 <select name="releaseYearStart">
                     <option value="-"><%=localeMap.get(WebMessageCode.AFTER_YEAR)%></option>
-                    <% int firstFilmYear = LocalDateTimeUtils.FIRST_FILM_DATE.getYear();
+                    <% int firstFilmYear = LocalDateUtils.FIRST_FILM_DATE.getYear();
                         for (int i = LocalDate.now().getYear(); i >= firstFilmYear; i--) {%>
                     <option value="<%=i%>"><%=i%>
                     </option>
