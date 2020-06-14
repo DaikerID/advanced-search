@@ -4,7 +4,6 @@
     <div class="nav-wrapper">
         <a href="/" class="brand-logo">what to see</a>
         <ul class="right hide-on-med-and-down">
-            <li>Load time - <%=LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yy HH:mm"))%></li>
             <li>
                 <form action="/search">
                     <div class="input-field">

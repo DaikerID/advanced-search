@@ -26,8 +26,7 @@ public class MovieSearchSpecificationUtils {
                             .and(hasActors(advancedSearchQuery)
                                 .and(hasDirectors(advancedSearchQuery)
                                     .and(hasProducers(advancedSearchQuery)
-                                    ))
-                    )))))));
+                                    )))))))));
   }
 
   public static Specification<Movie> hasNameLike(String filter) {

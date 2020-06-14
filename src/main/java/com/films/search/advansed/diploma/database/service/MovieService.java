@@ -1,10 +1,11 @@
 package com.films.search.advansed.diploma.database.service;
 
-import static com.films.search.advansed.diploma.search.utils.MovieSearchSpecificationUtils.*;
+import static com.films.search.advansed.diploma.search.utils.MovieSearchSpecificationUtils.buildSpecification;
+import static com.films.search.advansed.diploma.search.utils.MovieSearchSpecificationUtils.hasNameLike;
 
-import com.films.search.advansed.diploma.search.entities.AdvancedSearchQuery;
 import com.films.search.advansed.diploma.database.model.common.Movie;
 import com.films.search.advansed.diploma.database.repository.MovieRepository;
+import com.films.search.advansed.diploma.search.entities.AdvancedSearchQuery;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
